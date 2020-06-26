@@ -40,7 +40,7 @@ python wav_to_text.py audition
 ```
 ### Fine-tune Transcriptions in Audition
 * Delete all markers
-* Import the Markers file with STT transcriptions: Markers_STT.csv
+* Select `Import Markers from File` and select file with STT transcriptions: Markers_STT.csv
 * Fine-tune the Description field in Markers to exactly match the words spoken
 
 ### Export Markers and WAVs from Audition
