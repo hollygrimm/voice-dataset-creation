@@ -14,24 +14,34 @@ conda activate stt
 pip install google-cloud-speech tqdm pandas
 ```
 
-### Mark the Speech in Audition
-* Open audio file in Adobe Audition
+### Mark the Speech
+In **Audition**, Open audio file
 * Select `Diagnostics` -> `Mark Audio`
 * Select the `Mark the Speech` preset
 * Click `Scan`
 * Click `Find Levels`
+* Click `Scan` again
 * Click `Mark All`
 
-### Export Markers and WAVs from Audition
-* Open `Markers` Tab
-* Adjust markers, removing silence and noise to make clip length between 3 to 10 seconds long
-* Select all markers in list
-* Select `Export Selected Markers to CSV` and save as Markers.csv
-* Select `Export Audio of Selected Range Markers` with the following options: 
-    * Check `Use marker names in filenames`
-    * Update Format to `WAV PCM`
-    * Update Sample Type `22050 Hz Mono, 16-bit`
-    * Use folder name `wavs_export`
+Or, in **Audacity**, Open audio file
+* Select `Analyze`->`Sound Finder`
+
+### Export Markers and WAVs
+In Audition
+    * Open `Markers` Tab
+    * Adjust markers, removing silence and noise to make clip length between 3 to 10 seconds long
+    * Select all markers in list
+    * Select `Export Selected Markers to CSV` and save as Markers.csv
+    * Select `Export Audio of Selected Range Markers` with the following options: 
+        * Check `Use marker names in filenames`
+        * Update Format to `WAV PCM`
+        * Update Sample Type `22050 Hz Mono, 16-bit`
+        * Use folder name `wavs_export`
+
+OR
+
+* In Audacity
+    * 
 
 ### Create Initial Transcriptions with STT
 Create Markers_STT.csv file:
@@ -61,4 +71,10 @@ python markersfile_to_metadata.py audition
 
 
 *******
-TODO Add SNR utility
+TODO Add SNR colab? download Wada
+
+*****
+TODO Steps to create dataset synthetically
+
+****
+TODO Audacity 
