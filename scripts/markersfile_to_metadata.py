@@ -9,12 +9,16 @@ import pandas as pd
 def audition(wavs_export_path, wavs_final_path, input_filename, output_filename):
   create_metadata_and_wavs(wavs_export_path, wavs_final_path, input_filename, output_filename)
 
+def audacity(wavs_export_path, wavs_final_path, input_filename, output_filename):
+  create_metadata_and_wavs(wavs_export_path, wavs_final_path, input_filename, output_filename)
+
 def create_metadata_and_wavs(wavs_export_path, wavs_final_path, input_filename, output_filename):
   # delete and recreate wavs_final_path when rerunning
   if os.path.exists(wavs_final_path):
     rmtree(wavs_final_path)
   os.mkdir(wavs_final_path)
 
+  # TODO: parse audacity formatted file differently
   fp = open(output_filename, 'w')
 
   df = pd.read_csv(input_filename, sep='\t', encoding='utf-8')
@@ -48,6 +52,12 @@ def execute_cmdline(argv):
     p.add_argument(     '--wavs_export_path',  default="../test_data/wavs_export/")
     p.add_argument(     '--wavs_final_path',  default="../test_data/wavs/")
     p.add_argument(     '--input_filename',  default="../test_data/Markers.csv")
+    p.add_argument(     '--output_filename',  default="../test_data/metadata.csv")
+
+    p = add_command(    'audacity',         'Audacity format', 'audacity')
+    p.add_argument(     '--wavs_export_path',  default="../test_data/wavs_export/")
+    p.add_argument(     '--wavs_final_path',  default="../test_data/wavs/")
+    p.add_argument(     '--input_filename',  default="../test_data/Label Track STT.csv")
     p.add_argument(     '--output_filename',  default="../test_data/metadata.csv")
 
     args = parser.parse_args(argv[1:] if len(argv) > 1 else ['-h'])

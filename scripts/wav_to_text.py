@@ -14,6 +14,9 @@ from google.cloud.speech_v1p1beta1 import enums
 def audition(wavs_path, input_filename, output_filename, language_code, sample_rate_hertz):
     stt(wavs_path, input_filename, output_filename, language_code, sample_rate_hertz)
 
+def audacity(wavs_path, input_filename, output_filename, language_code, sample_rate_hertz):
+    stt(wavs_path, input_filename, output_filename, language_code, sample_rate_hertz)
+
 def stt(wavs_path, input_filename, output_filename, language_code, sample_rate_hertz):
     client = speech_v1p1beta1.SpeechClient()
     encoding = enums.RecognitionConfig.AudioEncoding.MP3
@@ -24,6 +27,9 @@ def stt(wavs_path, input_filename, output_filename, language_code, sample_rate_h
     }
 
     metadata = [['Name', 'Start', 'Duration', 'Time Format', 'Type', 'Description']]
+
+    # TODO: Audacity inputfile: Start End Num (No header)
+    # TODO: Audacity outputfile: Start End Num Label (No header)
 
     df = pd.read_csv(input_filename, sep='\t', encoding='utf-8')
     for wav_marker, start, duration, time_format, marker_type in zip(df['Name'].to_list(), df['Start'].to_list(), df['Duration'].to_list(), df['Time Format'].to_list(), df['Type'].to_list()):
@@ -67,6 +73,13 @@ def execute_cmdline(argv):
     p.add_argument(     '--wavs_path',  default="../test_data/wavs_export")
     p.add_argument(     '--input_filename',  default="../test_data/Markers.csv")
     p.add_argument(     '--output_filename', default="../test_data/Markers_STT.csv")
+    p.add_argument(     '--sample_rate_hertz', default=22050)
+    p.add_argument(     '--language_code', default='en-US')
+
+    p = add_command(    'audacity',         'Audacity format', 'audacity')
+    p.add_argument(     '--wavs_path',  default="../test_data/wavs_export")
+    p.add_argument(     '--input_filename',  default="../test_data/Label Track.csv")
+    p.add_argument(     '--output_filename', default="../test_data/Label Track STT.csv")
     p.add_argument(     '--sample_rate_hertz', default=22050)
     p.add_argument(     '--language_code', default='en-US')
 
