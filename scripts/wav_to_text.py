@@ -53,7 +53,7 @@ def stt(file_type, wavs_path, input_filename, output_filename, language_code, sa
             elif file_type =='audacity':             
                 metadata.append([start, duration, wav_marker, alternative.transcript])
         except Exception as err:
-            metadata.append([filename, "error: {0}".format(err)])
+            metadata.append([local_file_path, "error: {0}".format(err)])
 
     # write out csv
     csv_out = csv.writer(open(output_filename, 'w'), delimiter='\t',

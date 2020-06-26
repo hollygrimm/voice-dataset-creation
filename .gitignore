@@ -1,3 +1,5 @@
 test_data/metadata.csv
 test_data/wavs/
 .DS_Store
+test_data/Label Track STT.txt
+test_data/Markers_STT.csv
