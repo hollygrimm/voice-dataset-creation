@@ -64,7 +64,7 @@ def execute_cmdline(argv):
         return subparsers.add_parser(cmd, description=desc, help=desc, epilog=epilog)
 
     p = add_command(    'audition',         'Audition format', 'audition')
-    p.add_argument(     '--wavs_path',  default="../test_data/wavs")
+    p.add_argument(     '--wavs_path',  default="../test_data/wavs_export")
     p.add_argument(     '--input_filename',  default="../test_data/Markers.csv")
     p.add_argument(     '--output_filename', default="../test_data/Markers_STT.csv")
     p.add_argument(     '--sample_rate_hertz', default=22050)
