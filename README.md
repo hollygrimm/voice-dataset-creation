@@ -100,7 +100,16 @@ python markersfile_to_metadata.py audacity
 ```
 
 ***
-TODO Add SNR colab
+TODO SNR Colab: git pull repo and use wav directory instead of wavs.tar.gz
 
 ***
 TODO Steps to create dataset synthetically
+
+***
+TODO Graphic of steps
+
+***
+TODO ffmpeg conversion code
+
+***
+TODO wav durations code
