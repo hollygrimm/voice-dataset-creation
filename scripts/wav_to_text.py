@@ -67,7 +67,7 @@ def execute_cmdline(argv):
     p.add_argument(     '--wavs_path',  default="../test_data/wavs")
     p.add_argument(     '--input_filename',  default="../test_data/Markers.csv")
     p.add_argument(     '--output_filename', default="../test_data/Markers_STT.csv")
-    p.add_argument(     '--sample_rate_hertz', default=48000)
+    p.add_argument(     '--sample_rate_hertz', default=22050)
     p.add_argument(     '--language_code', default='en-US')
 
     args = parser.parse_args(argv[1:] if len(argv) > 1 else ['-h'])
