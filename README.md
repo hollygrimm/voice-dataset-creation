@@ -1,4 +1,5 @@
 # Voice Dataset Creation
+This repo outlines the steps and scripts necessary to create your own text-to-speech dataset for training a voice model. The final output is in LJSpeech format.
 
 ![Flow Chart](assets/flowchart.png)
 
