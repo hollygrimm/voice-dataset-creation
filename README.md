@@ -3,7 +3,9 @@ This repo outlines the steps and scripts necessary to create your own text-to-sp
 
 ![Flow Chart](assets/flowchart.png)
 
-## Create Your Own Voice Recordings
+
+
+## ![Blue](assets/purplemarker.png) Create Your Own Voice Recordings
 
 ### Requirements
 * Voice Recording Software
@@ -19,7 +21,7 @@ TODO: Best microphone setup described
 ### Utterance Lengths
 Run `scripts\wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
 
-## Create a Synthetic Voice Dataset
+## ![Blue](assets/pinkmarker.png) Create a Synthetic Voice Dataset
 
 ### Requirements
 * Google Cloud Platform Compute Engine Instance
@@ -46,7 +48,7 @@ pip install google-cloud-speech tqdm pandas
 Run `scripts\wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
 
 
-## Create Transcriptions for Existing Voice Recordings
+## ![Blue](assets/bluemarker.png) Create Transcriptions for Existing Voice Recordings
 
 ### Requirements
 * Adobe Audition or Audacity
