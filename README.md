@@ -3,7 +3,9 @@ This repo outlines the steps and scripts necessary to create your own text-to-sp
 
 ![Flow Chart](assets/flowchart.png)
 
+Detailed steps are color-coded below.
 
+***
 
 ## ![Blue](assets/purplemarker.png) Create Your Own Voice Recordings
 
@@ -19,7 +21,9 @@ TODO: Best microphone setup described
 * Sample rate should be 22050 or greater
 
 ### Utterance Lengths
-Run `scripts\wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
+Run `scripts/wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
+
+***
 
 ## ![Blue](assets/pinkmarker.png) Create a Synthetic Voice Dataset
 
@@ -39,14 +43,17 @@ pip install google-cloud-speech tqdm pandas
 
 ### Create a Text Corpus of Utterances
 * Create utterances that will be about 3-10 seconds when spoken
-* Use LJSpeech format, 1|<utterance>
+* Use LJSpeech format
+    * "|" separated values, wav file id then utterance text
+    * `100|this is an example utterance`
 
 ### Generate Synthetic Voice Dataset
-* ~~Run `scripts\text_to_wav.py`~~ <-TODO
+* ~~Run `scripts/text_to_wav.py`~~ <-TODO
 
 ### Utterance Lengths
-Run `scripts\wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
+Run `scripts/wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
 
+***
 
 ## ![Blue](assets/bluemarker.png) Create Transcriptions for Existing Voice Recordings
 
@@ -157,7 +164,7 @@ For **Audacity**:
     * Use folder `wavs_export`
 
 ### Convert Markers(Audition) or Labels(Audacity) into LJSpeech format
-Using the exported `Markers.csv`/`Label Track STT.txt` and WAVs in wavs_export, `markersfile_to_metadata.py` will create a metadata.csv and folder of WAVs to train your  TTS model:
+Using the exported `Markers.csv`(Audition) or `Label Track STT.txt` (Audacity) and WAVs in wavs_export, `markersfile_to_metadata.py` will create a metadata.csv and folder of WAVs to train your  TTS model:
 
 For **Audition**:
 ```bash
@@ -170,7 +177,7 @@ python markersfile_to_metadata.py audacity
 ```
 
 ### Utterance Lengths
-Run `scripts\wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
+Run `scripts/wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
 
 
 ## Other Utilities
@@ -178,7 +185,7 @@ Run `scripts\wavdurations2csv.sh` to chart out utterance length and verify that 
 ### Upsample WAV file
 After testing many tools, ffmpeg does the best upsampling from 16k to 22050 Hz
 ```
-script\resamplewav.sh
+scripts/resamplewav.sh
 ```
 
 ## References
