@@ -177,3 +177,6 @@ After testing many tools, ffmpeg does the best upsampling from 16k to 22050 Hz
 ```
 script\resamplewav.sh
 ```
+
+## References
+* Mozilla TTS: https://github.com/mozilla/TTS
