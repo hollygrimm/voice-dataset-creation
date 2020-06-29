@@ -123,8 +123,6 @@ Or, in **Audacity**:
 * Select `Export labels` to `Label Track.txt`
 
 ### Analyze WAVs with Signal to Noise Ratio Colab
-TODO: git pull repo and use wav directory instead of wavs.tar.gz
-
 * run [colabs/voice_dataset_SNR.ipynb](colabs/voice_dataset_SNR.ipynb)
 * Clean or remove noisy files
 
