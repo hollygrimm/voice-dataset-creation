@@ -192,7 +192,8 @@ Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out utte
 ## Other Utilities
 
 ### Upsample WAV file
-![ffmpeg](assets/upsample_ffmpeg.png) ![resampy](assets/upsample_resampy.png)
+ffmpeg:![ffmpeg](assets/upsample_ffmpeg.png)
+resampy:![resampy](assets/upsample_resampy.png)
 We tested three methods to upsample WAV files from 16,000 to 22,050 Hz. After reviewing the spectrograms, we selected ffmpeg for upsampling as it includes another 2 KHz of high end information when compared to resampy. [scripts/resamplewav.sh](scripts/resamplewav.sh)
 ```
 scripts/resamplewav.sh
