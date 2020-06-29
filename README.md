@@ -15,6 +15,8 @@ This repo outlines the steps and scripts necessary to create your own text-to-sp
 
 ### Requirements
 * Voice Recording Software
+* Omni-directional head-mounted microphone
+* Good quality audio card
 
 ### Create a Text Corpus of Utterances
 * Create utterances that will be about 3-10 seconds when spoken
@@ -23,11 +25,8 @@ This repo outlines the steps and scripts necessary to create your own text-to-sp
     * `100|this is an example utterance`
 
 ### Speak and Record Utterances
-TODO: Best microphone setup described
 * Speak each utterance as written
 * Sample rate should be 22050 or greater
-* Record with an an omni-directional head-mounted microphone
-* Use a good quality audio card
 
 ### Utterance Lengths
 Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out utterance length and verify that you have a good distribution of WAV file lengths.
@@ -193,6 +192,7 @@ Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out utte
 ## Other Utilities
 
 ### Upsample WAV file
+![ffmpeg](assets/upsample_ffmpeg.png) ![resampy](assets/upsample_resampy.png)
 We tested three methods to upsample WAV files from 16,000 to 22,050 Hz. After reviewing the spectrograms, we selected ffmpeg for upsampling as it includes another 2 KHz of high end information when compared to resampy. [scripts/resamplewav.sh](scripts/resamplewav.sh)
 ```
 scripts/resamplewav.sh
