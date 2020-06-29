@@ -3,29 +3,38 @@ This repo outlines the steps and scripts necessary to create your own text-to-sp
 
 ![Flow Chart](assets/flowchart.png)
 
-Detailed steps are color-coded below.
+## Table of Contents
+* [Create Your Own Voice Recordings](#-create-your-own-voice-recordings)
+* [Create a Synthetic Voice Dataset](#-create-a-synthetic-voice-dataset)
+* [Create Transcriptions for Existing Voice Recordings](#-create-transcriptions-for-existing-voice-recordings)
+* [Other Utilities](#other-utilities)
 
 ***
 
-## ![Blue](assets/purplemarker.png) Create Your Own Voice Recordings
+## ![Purple](assets/purplemarker.png) Create Your Own Voice Recordings
 
 ### Requirements
 * Voice Recording Software
 
 ### Create a Text Corpus of Utterances
 * Create utterances that will be about 3-10 seconds when spoken
+* Use LJSpeech format
+    * "|" separated values, wav file id then utterance text
+    * `100|this is an example utterance`
 
 ### Speak and Record Utterances
 TODO: Best microphone setup described
 * Speak each utterance as written
 * Sample rate should be 22050 or greater
+* Record with an an omni-directional head-mounted microphone
+* Use a good quality audio card
 
 ### Utterance Lengths
-Run `scripts/wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
+Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out utterance length and verify that you have a good distribution of WAV file lengths.
 
 ***
 
-## ![Blue](assets/pinkmarker.png) Create a Synthetic Voice Dataset
+## ![Pink](assets/pinkmarker.png) Create a Synthetic Voice Dataset
 
 ### Requirements
 * Google Cloud Platform Compute Engine Instance
@@ -51,7 +60,7 @@ pip install google-cloud-speech tqdm pandas
 * ~~Run `scripts/text_to_wav.py`~~ <-TODO
 
 ### Utterance Lengths
-Run `scripts/wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
+Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out utterance length and verify that you have a good distribution of WAV file lengths.
 
 ***
 
@@ -117,7 +126,7 @@ Or, in **Audacity**:
 ### Analyze WAVs with Signal to Noise Ratio Colab
 TODO: git pull repo and use wav directory instead of wavs.tar.gz
 
-* run `colabs/voice_dataset_SNR.ipynb`
+* run [colabs/voice_dataset_SNR.ipynb](colabs/voice_dataset_SNR.ipynb)
 * Clean or remove noisy files
 
 ### Create Initial Transcriptions with STT
@@ -164,7 +173,7 @@ For **Audacity**:
     * Use folder `wavs_export`
 
 ### Convert Markers(Audition) or Labels(Audacity) into LJSpeech format
-Using the exported `Markers.csv`(Audition) or `Label Track STT.txt` (Audacity) and WAVs in wavs_export, `markersfile_to_metadata.py` will create a metadata.csv and folder of WAVs to train your  TTS model:
+Using the exported `Markers.csv`(Audition) or `Label Track STT.txt` (Audacity) and WAVs in wavs_export, [scripts/markersfile_to_metadata.py](scripts/markersfile_to_metadata.py) will create a metadata.csv and folder of WAVs to train your TTS model:
 
 For **Audition**:
 ```bash
@@ -177,16 +186,19 @@ python markersfile_to_metadata.py audacity
 ```
 
 ### Utterance Lengths
-Run `scripts/wavdurations2csv.sh` to chart out utterance length and verify that you have a good distribution of WAV file lengths.
+Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out utterance length and verify that you have a good distribution of WAV file lengths.
 
+***
 
 ## Other Utilities
 
 ### Upsample WAV file
-After testing many tools, ffmpeg does the best upsampling from 16k to 22050 Hz
+We tested three methods to upsample WAV files from 16,000 to 22,050 Hz. After reviewing the spectrograms, we selected ffmpeg for upsampling as it includes another 2 KHz of high end information when compared to resampy. [scripts/resamplewav.sh](scripts/resamplewav.sh)
 ```
 scripts/resamplewav.sh
 ```
 
 ## References
 * Mozilla TTS: https://github.com/mozilla/TTS
+* Automating alignment, includes segment audio on silence, Google Speech API, and recognition alignment: https://github.com/carpedm20/multi-Speaker-tacotron-tensorflow#2-2-generate-korean-datasets
+* Pretraining on large synthetic corpuses and fine tuning on specific ones https://twitter.com/garygarywang
