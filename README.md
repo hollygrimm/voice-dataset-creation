@@ -201,3 +201,4 @@ scripts/resamplewav.sh
 * Mozilla TTS: https://github.com/mozilla/TTS
 * Automating alignment, includes segment audio on silence, Google Speech API, and recognition alignment: https://github.com/carpedm20/multi-Speaker-tacotron-tensorflow#2-2-generate-korean-datasets
 * Pretraining on large synthetic corpuses and fine tuning on specific ones https://twitter.com/garygarywang
+* Datasheets for Datasets https://arxiv.org/abs/1803.09010
