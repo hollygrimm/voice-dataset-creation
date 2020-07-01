@@ -18,18 +18,18 @@ This repo outlines the steps and scripts necessary to create your own text-to-sp
 * Omni-directional head-mounted microphone
 * Good quality audio card
 
-### Create a Text Corpus of Utterances
-* Create utterances that will be about 3-10 seconds when spoken
+### Create a Text Corpus of Sentences
+* Create sentences that will be about 3-10 seconds when spoken
 * Use LJSpeech format
-    * "|" separated values, wav file id then utterance text
-    * `100|this is an example utterance`
+    * "|" separated values, wav file id then sentence text
+    * `100|this is an example sentence`
 
-### Speak and Record Utterances
-* Speak each utterance as written
+### Speak and Record Sentences
+* Speak each sentence as written
 * Sample rate should be 22050 or greater
 
-### Utterance Lengths
-Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out utterance length and verify that you have a good distribution of WAV file lengths.
+### Sentence Lengths
+Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out sentence length and verify that you have a good distribution of WAV file lengths.
 
 ***
 
@@ -46,20 +46,20 @@ Create Conda Environment on GCP Instance
 ```bash
 conda create -n tts python=3.7
 conda activate tts
-pip install google-cloud-speech tqdm pandas
+pip install google-cloud-texttospeech==2.1.0 tqdm pandas
 ```
 
-### Create a Text Corpus of Utterances
-* Create utterances that will be about 3-10 seconds when spoken
+### Create a Text Corpus of Sentences
+* Create sentences that will be about 3-10 seconds when spoken
 * Use LJSpeech format
-    * "|" separated values, wav file id then utterance text
-    * `100|this is an example utterance`
+    * "|" separated values, wav file id then sentence text
+    * `100|this is an example sentence`
 
 ### Generate Synthetic Voice Dataset
-* ~~Run `scripts/text_to_wav.py`~~ <-TODO
+* `python text_to_wav.py tts_generate`
 
-### Utterance Lengths
-Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out utterance length and verify that you have a good distribution of WAV file lengths.
+### Sentence Lengths
+Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out sentence length and verify that you have a good distribution of WAV file lengths.
 
 ***
 
@@ -182,8 +182,8 @@ For **Audacity**:
 python markersfile_to_metadata.py audacity
 ```
 
-### Utterance Lengths
-Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out utterance length and verify that you have a good distribution of WAV file lengths.
+### Sentence Lengths
+Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out sentence length and verify that you have a good distribution of WAV file lengths.
 
 ***
 
