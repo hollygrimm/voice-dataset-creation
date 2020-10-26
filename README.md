@@ -80,7 +80,7 @@ conda activate stt
 pip install google-cloud-speech tqdm pandas
 ```
 
-### Fill out a Datasheet for the Dataset
+### Fill out a Datasheet for the Voice Dataset
 
 * Review Datasheets for Datasets by Gebru et al.: https://arxiv.org/pdf/1803.09010.pdf
 * Markdown Datasheet: https://github.com/JRMeyer/markdown-datasheet-for-datasets/blob/master/DATASHEET.md
