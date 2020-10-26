@@ -80,6 +80,12 @@ conda activate stt
 pip install google-cloud-speech tqdm pandas
 ```
 
+### Fill out a Datasheet for the Dataset
+
+* Review Datasheets for Datasets by Gebru et al.: https://arxiv.org/pdf/1803.09010.pdf
+* Markdown Datasheet: https://github.com/JRMeyer/markdown-datasheet-for-datasets/blob/master/DATASHEET.md
+
+
 ### Mark the Speech
 In **Adobe Audition**, open audio file:
 * Select `Diagnostics` -> `Mark Audio`
