@@ -12,7 +12,7 @@ flowchart TD
     D -->|Yes| P2[Transcribe existing]
 
     P1 --> SEG[Segment on silence]
-    SEG --> META
+    SEG --> LANG
 
     P2 --> LANG{Language?}
     LANG -->|Whisper| W[02a Whisper]
