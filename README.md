@@ -4,32 +4,32 @@ This repository supports communities in building voice datasets for language pre
 
 ```mermaid
 flowchart TD
-    A([Start]) --> B[Complete community agreement\ndocs/community_agreement_template.md]
-    B --> C[Review: what not to digitize\ndocs/what_not_to_digitize.md]
-    C --> D{Existing recordings?}
+    A([Start]) --> B[Community agreement]
+    B --> C[What not to digitize]
+    C --> D{Existing\nrecordings?}
 
-    D -->|No| P1[Pathway 1: Record New\n01_record_and_segment.ipynb]
-    D -->|Yes| P2[Pathway 2: Transcribe Existing\nAudacity or Adobe Audition]
+    D -->|No| P1[Record new audio]
+    D -->|Yes| P2[Transcribe existing]
 
-    P1 --> SEG[Segment audio\nsegment_on_silence.py]
+    P1 --> SEG[Segment on silence]
     SEG --> META
 
     P2 --> LANG{Language?}
-    LANG -->|"Whisper-supported\nEnglish, Spanish, Māori..."| W[02a_transcribe_whisper.ipynb]
-    LANG -->|"MMS-supported\nCree syllabics, Ojibwe..."| M[02b_transcribe_mms.ipynb]
-    LANG -->|"Not covered or\nprefer manual"| MAN[02c_transcribe_manual.ipynb]
-    W & M & MAN --> REV[Review + correct transcripts]
+    LANG -->|Whisper| W[02a Whisper]
+    LANG -->|MMS| M[02b MMS]
+    LANG -->|Manual| MAN[02c Manual]
+    W & M & MAN --> REV[Review transcripts]
     REV --> META
 
-    META[Fill metadata\nmetadata/metadata_template.csv] --> SNR
-    SNR[SNR quality analysis\n03_snr_quality_analysis.ipynb] --> EMETA
-    EMETA[export_metadata.py] --> AUG{Dataset too small?}
+    META[Fill metadata] --> SNR[SNR quality check]
+    SNR --> EMETA[Export metadata]
+    EMETA --> AUG{Dataset\ntoo small?}
 
-    AUG -->|Yes| P3[Pathway 3: Augment\n04_augmentation.ipynb]
+    AUG -->|Yes| P3[Augment]
     AUG -->|No| EXP
     P3 --> EXP
 
-    EXP[Export to LJSpeech\n05_export_ljspeech.ipynb] --> DONE([Train your TTS model])
+    EXP[Export LJSpeech] --> DONE([Train TTS model])
 ```
 
 > Before beginning, read [docs/what_not_to_digitize.md](docs/what_not_to_digitize.md). Not all recordings should become training data. This is the most important decision in the workflow.
