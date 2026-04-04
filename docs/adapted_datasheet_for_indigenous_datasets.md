@@ -2,6 +2,8 @@
 
 **Adapted** OCAP® Principles-Based Template
 
+*Adapted from the OCAP® framework developed by the [First Nations Information Governance Centre](https://fnigc.ca/ocap-training/).*
+
 ## **DATASET IDENTIFICATION & MOTIVATION**
 
 **Dataset title:**
@@ -34,23 +36,23 @@
 
 **What partnerships or collaborations supported this work?**
 
+---
+
+## **OWNERSHIP: Community Collective Rights**
+
 ### Community Authority & Data Sovereignty
 
 **Which Indigenous community owns this dataset?**
 
-**What does ownership mean with respect to this dataset?** 
+**What does ownership mean with respect to this dataset?**
 
 **What is the traditional territory and governance structure?**
 
 **Who has decision-making authority over this data?** (council, elders, traditional authorities, data stewards)
 
-**What technologies are utilized to enable decision-making or document the processes?** (e.g., blockchain, voting platforms, Google docs for notes, Teams, ect.)
+**What technologies are utilized to enable decision-making or document the processes?** (e.g., shared documents, meeting minutes, community voting platforms)
 
 **What community approval process was followed for this framework?**
-
----
-
-## **OWNERSHIP: Community Collective Rights**
 
 ### Legal & Cultural Recognition
 
@@ -64,7 +66,7 @@
 
 ### Knowledge Holder Relationships
 
-**What relationships enabled access to these knowledges?**
+**What relationships enabled access to these *knowledges*?**
 
 **What consent processes were followed?** (individual, institutional, family, community, traditional authority)
 
@@ -81,8 +83,6 @@
 **What decision-making authority does the community retain over all data uses?**
 
 **What approval processes must external users follow?**
-
-**How can the community modify or revoke permissions?**
 
 **What governance protocols address disputes or concerns?**
 
@@ -124,9 +124,9 @@
 
 **What review criteria guide access decisions?**
 
-**What partnerships and agreements govern external sharing?**
+**What external data-sharing partnerships and agreements govern external sharing?**
 
-**What benefit-sharing arrangements are required?**
+**What benefit-sharing arrangements are required?** (See also: *Existing Agreements* below.)
 
 ### Intended & Prohibited Uses
 
@@ -174,7 +174,7 @@
 
 ## **COMMUNITY APPROVAL & GOVERNANCE**
 
-### Community Authority (Band Council, Traditional Council, Elders’ Committee, etc.) Confirmation
+### Community Authority (Band Council, Traditional Council, Elders' Committee, etc.) Confirmation
 
 **Primary community representative name and title:**
 
@@ -182,11 +182,7 @@
 
 **Next scheduled review date and process of securing future review dates:**
 
-### Ongoing Governance
-
 **Primary community contact for dataset governance:**
-
-**How does the community maintain ongoing control?**
 
 **What happens if community priorities change or relationships with relevant external bodies change?**
 
@@ -247,4 +243,4 @@ Understanding Machine Learning Practitioners' Data Documentation Perceptions, Ne
 [https://dl.acm.org/doi/10.1145/3555760](https://dl.acm.org/doi/10.1145/3555760)
 
 TK Labels by Local Contexts  
-[https://localcontexts.org/labels/traditional-knowledge-labels/](https://localcontexts.org/labels/traditional-knowledge-labels/)  
+[https://localcontexts.org/labels/traditional-knowledge-labels/](https://localcontexts.org/labels/traditional-knowledge-labels/)

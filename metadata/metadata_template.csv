@@ -1,0 +1,4 @@
+file_id,transcript,speaker_id,language,consent_tier,cultural_protocol,knowledge_keeper_reviewed,exclude_from_training,exclude_reason,recorded_by,recording_date,provenance_note
+1,It had begun to snow again.,SPK_001,en,open,no restrictions noted,true,false,,Community Language Project,2024-03-15,
+2,"He watched sleepily the flakes silver and dark, falling obliquely against the lamplight.",SPK_001,en,community,elder knowledge: knowledge keeper review required before any external use,true,false,,Community Language Project,2024-03-15,
+3,The time had come for him to set out on his journey westward.,SPK_001,en,restricted,winter ceremony context: seasonal restriction November-February,true,true,ceremonial content — archival only per elder council decision,Community Language Project,2024-03-15,

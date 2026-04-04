@@ -1,210 +1,228 @@
-# Voice Dataset Creation
-This repo outlines the steps and scripts necessary to create your own text-to-speech dataset for training a voice model. The final output is in LJSpeech format.
+# Community Voice Dataset Creation
 
-![Flow Chart](assets/flowchart.png)
+This repository supports communities in building voice datasets for language preservation and AI development. It is a digital companion to the chapter "AI Techniques for Indigenous Cultural Expression" in the the book "Envisioning Indigenous Methods in Digital Media and Ecologies".
+
+```mermaid
+flowchart TD
+    A([Start]) --> B[Complete community agreement\ndocs/community_agreement_template.md]
+    B --> C[Review: what not to digitize\ndocs/what_not_to_digitize.md]
+    C --> D{Existing recordings?}
+
+    D -->|No| P1[Pathway 1: Record New\n01_record_and_segment.ipynb]
+    D -->|Yes| P2[Pathway 2: Transcribe Existing\nAudacity or Adobe Audition]
+
+    P1 --> SEG[Segment audio\nsegment_on_silence.py]
+    SEG --> META
+
+    P2 --> LANG{Language?}
+    LANG -->|"Whisper-supported\nEnglish, Spanish, Māori..."| W[02a_transcribe_whisper.ipynb]
+    LANG -->|"MMS-supported\nCree syllabics, Ojibwe..."| M[02b_transcribe_mms.ipynb]
+    LANG -->|"Not covered or\nprefer manual"| MAN[02c_transcribe_manual.ipynb]
+    W & M & MAN --> REV[Review + correct transcripts]
+    REV --> META
+
+    META[Fill metadata\nmetadata/metadata_template.csv] --> SNR
+    SNR[SNR quality analysis\n03_snr_quality_analysis.ipynb] --> EMETA
+    EMETA[export_metadata.py] --> AUG{Dataset too small?}
+
+    AUG -->|Yes| P3[Pathway 3: Augment\n04_augmentation.ipynb]
+    AUG -->|No| EXP
+    P3 --> EXP
+
+    EXP[Export to LJSpeech\n05_export_ljspeech.ipynb] --> DONE([Train your TTS model])
+```
+
+> Before beginning, read [docs/what_not_to_digitize.md](docs/what_not_to_digitize.md). Not all recordings should become training data. This is the most important decision in the workflow.
+
+---
+
+## Guiding Principles
+
+This repository is designed in alignment with the [CARE Principles for Indigenous Data Governance](https://www.gida-global.org/care) (Collective Benefit, Authority to Control, Responsibility, Ethics). See [CARE_PRINCIPLES.md](CARE_PRINCIPLES.md) for how each principle is enacted here, and [CHANGELOG.md](CHANGELOG.md) for the full history of changes from the 2020 original.
+
+---
 
 ## Table of Contents
-* [Create Your Own Voice Recordings](#-create-your-own-voice-recordings)
-* [Create a Synthetic Voice Dataset](#-create-a-synthetic-voice-dataset)
-* [Create Transcriptions for Existing Voice Recordings](#-create-transcriptions-for-existing-voice-recordings)
-* [Other Utilities](#other-utilities)
 
-***
+- [Community Voice Dataset Creation](#community-voice-dataset-creation)
+  - [Guiding Principles](#guiding-principles)
+  - [Table of Contents](#table-of-contents)
+  - [Setup](#setup)
+  - [Pathway 1: Record Your Own Voice](#pathway-1-record-your-own-voice)
+    - [Before Recording](#before-recording)
+    - [Recording Requirements](#recording-requirements)
+    - [Segment and Label](#segment-and-label)
+    - [Check Sentence Lengths](#check-sentence-lengths)
+  - [Pathway 2: Transcribe Existing Recordings](#pathway-2-transcribe-existing-recordings)
+    - [Mark and Export](#mark-and-export)
+    - [Transcribe with Whisper](#transcribe-with-whisper)
+    - [Review and Correct Transcriptions](#review-and-correct-transcriptions)
+    - [Analyze Signal-to-Noise Ratio](#analyze-signal-to-noise-ratio)
+    - [Export to Metadata](#export-to-metadata)
+  - [Pathway 3: Augment a Small Dataset](#pathway-3-augment-a-small-dataset)
+  - [Metadata Schema](#metadata-schema)
+  - [Export to LJSpeech Format](#export-to-ljspeech-format)
+  - [Utilities](#utilities)
+    - [Upsample WAV files (16 kHz → 22050 Hz)](#upsample-wav-files-16-khz--22050-hz)
+  - [References](#references)
 
-## ![Purple](assets/purplemarker.png) Create Your Own Voice Recordings
+---
 
-### Requirements
-* Voice Recording Software
-* Omni-directional head-mounted microphone
-* Good quality audio card
+## Setup
 
-### Create a Text Corpus of Sentences
-* Create sentences that will be about 3-10 seconds when spoken
-* Use LJSpeech format
-    * "|" separated values, wav file id then sentence text
-    * `100|this is an example sentence`
-
-### Speak and Record Sentences
-* Speak each sentence as written
-* Sample rate should be 22050 or greater
-
-### Sentence Lengths
-Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out sentence length and verify that you have a good distribution of WAV file lengths.
-
-***
-
-## ![Pink](assets/pinkmarker.png) Create a Synthetic Voice Dataset
-
-### Requirements
-* Google Cloud Platform Compute Engine Instance
-    * `Cloud API access scopes` select `Allow full access to all Cloud APIs`
-* Conda
-
-### Installation
-Create Conda Environment on GCP Instance
+**Requirements:** Python 3.11+, [uv](https://github.com/astral-sh/uv), `ffmpeg`, `sox`
 
 ```bash
-conda create -n tts python=3.7
-conda activate tts
-pip install google-cloud-texttospeech==2.1.0 tqdm pandas
+# Install uv if you don't have it
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create environment and install exact locked dependencies (verifies hashes)
+uv sync --extra dev
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 ```
 
-### Create a Text Corpus of Sentences
-* Create sentences that will be about 3-10 seconds when spoken
-* Use LJSpeech format
-    * "|" separated values, wav file id then sentence text
-    * `100|this is an example sentence`
+`uv sync` installs from `uv.lock`, which pins exact versions and verifies package hashes — protecting against supply chain attacks like the 2026 litellm incident. Never run `uv pip install` without the lockfile when working with sensitive community data.
 
-### Generate Synthetic Voice Dataset
-* `python text_to_wav.py tts_generate`
+No cloud credentials are required. All transcription runs locally.
 
-### Sentence Lengths
-Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out sentence length and verify that you have a good distribution of WAV file lengths.
+**Updating dependencies (maintainers):** Edit `pyproject.toml`, then run `uv lock` to regenerate the lockfile before committing.
 
-***
+---
 
-## ![Blue](assets/bluemarker.png) Create Transcriptions for Existing Voice Recordings
+## Pathway 1: Record Your Own Voice
 
-### Requirements
-* Adobe Audition or Audacity
-* Google Cloud Platform Compute Engine Instance
-    * `Cloud API access scopes` select `Allow full access to all Cloud APIs`
-* Conda
+**Notebook:** [notebooks/01_record_and_segment.ipynb](notebooks/01_record_and_segment.ipynb)
 
-### Installation
-Create Conda Environment on GCP Instance
+This pathway is for communities recording new speech with consenting speakers.
+
+### Before Recording
+
+1. Complete the [Community Data Agreement](docs/community_agreement_template.md) with each speaker. For institutional-level governance documentation (dataset ownership, funding, access policies), fill out the [Adapted Datasheet for Indigenous Datasets](docs/adapted_datasheet_for_indigenous_datasets.md).
+2. Work through [docs/what_not_to_digitize.md](docs/what_not_to_digitize.md) to identify any material that should not be recorded or should be restricted.
+3. Prepare `metadata/metadata_template.csv` — fill in speaker consent tiers and cultural protocol notes before the session.
+
+### Recording Requirements
+
+- Omni-directional or cardioid head-mounted microphone
+- Quiet, acoustically treated room
+- Sample rate: 22050 Hz or higher, mono, 16-bit PCM
+
+### Segment and Label
+
+In **Audacity**:
+- Open your recording and select `Analyze` → `Sound Finder`
+- Adjust dB thresholds until clips are 3–10 seconds
+- Export labels: `File` → `Export` → `Export Labels` → save as `Label Track.txt`
+- Export WAVs: `File` → `Export` → `Export Multiple...`
+  - Format: WAV, Signed 16-bit PCM
+  - Split on Labels, name by Label/Track Name
+  - Output folder: `wavs_export`
+
+Or run the segmentation script directly:
 
 ```bash
-conda create -n stt python=3.7
-conda activate stt
-pip install google-cloud-speech tqdm pandas
+python scripts/segment_on_silence.py --input recording.wav --output-dir test_data/wavs_export_audacity
 ```
 
-### Fill out a Datasheet for the Voice Dataset
+### Check Sentence Lengths
 
-* Review Datasheets for Datasets by Gebru et al.: https://arxiv.org/pdf/1803.09010.pdf
-* Markdown Datasheet: https://github.com/JRMeyer/markdown-datasheet-for-datasets/blob/master/DATASHEET.md
-
-
-### Mark the Speech
-In **Adobe Audition**, open audio file:
-* Select `Diagnostics` -> `Mark Audio`
-* Select the `Mark the Speech` preset
-* Click `Scan`
-* Click `Find Levels`
-* Click `Scan` again
-* Click `Mark All`
-* Adjust audio and silence signal dB and length until clips are between 3-10 seconds
-
-Or, in **Audacity**, open audio file:
-* Select `Analyze`->`Sound Finder`
-* Adjust audio and silence signal dB and length until clips are between 3-10 seconds
-
-### Adjust Markers or Label Boundaries
-In **Audition**:
-* Open `Markers` Tab
-* Adjust markers, removing silence and noise to make clip length between 3 to 10 seconds long
-
-In **Audition**:
-* Adjust label boundaries, removing silence and noise to make clip length between 3 to 10 seconds long
-
-### Export Markers/Labels and WAVs
-In **Audition**:
-* Select all markers in list
-* Select `Export Selected Markers to CSV` and save as Markers.csv
-* Select `Preferences` -> `Media & Disk Cache` and Untick `Save Peak Files`
-* Select `Export Audio of Selected Range Markers` with the following options: 
-    * Check `Use marker names in filenames`
-    * Update Format to `WAV PCM`
-    * Update Sample Type `22050 Hz Mono, 16-bit`
-    * Use folder `wavs_export`
-
-Or, in **Audacity**:
-* Select `Export multiple...`
-    * Format: WAV
-    * Options: Signed 16-bit PCM
-    * Split files based on Labels
-    * Name files using Label/Track Name
-    * Use folder `wavs_export`
-* Select `Export labels` to `Label Track.txt`
-
-### Analyze WAVs with Signal to Noise Ratio Colab
-* run [colabs/voice_dataset_SNR.ipynb](colabs/voice_dataset_SNR.ipynb)
-* Clean or remove noisy files
-
-### Create Initial Transcriptions with STT
-For **Audition**, using the exported `Markers.csv` and wavs folder run:
 ```bash
-cd scripts
-python wav_to_text.py audition
+scripts/wavdurations2csv.sh
 ```
-The script generates a new file, `Markers_STT.csv`.
 
-For **Audacity**, using the exported `Label Track.txt` and wavs folder run:
+---
+
+## Pathway 2: Transcribe Existing Recordings
+
+This pathway is for communities digitizing existing recordings (cassettes, reel-to-reel, field recordings). All transcription runs locally — no audio leaves community infrastructure.
+
+Choose the notebook for your language:
+
+| Language | Notebook |
+|---|---|
+| English, Spanish, Māori, or other [Whisper-supported language](https://github.com/openai/whisper#available-models-and-languages) | [notebooks/02a_transcribe_whisper.ipynb](notebooks/02a_transcribe_whisper.ipynb) |
+| Navajo or other language in the [MMS list](https://dl.fbaipublicfiles.com/mms/misc/language_coverage_mms.html) | [notebooks/02b_transcribe_mms.ipynb](notebooks/02b_transcribe_mms.ipynb) |
+| Language not covered by either tool, or community prefers manual | [notebooks/02c_transcribe_manual.ipynb](notebooks/02c_transcribe_manual.ipynb) |
+
+### Mark and Export
+
+Follow the same Audacity segmentation steps from Pathway 1, or use Adobe Audition:
+- `Diagnostics` → `Mark Audio` → `Mark the Speech` preset
+- Export markers to `Markers.csv` and WAVs to `wavs_export/`
+
+### Analyze Signal-to-Noise Ratio
+
+Run [notebooks/03_snr_quality_analysis.ipynb](notebooks/03_snr_quality_analysis.ipynb) to identify and remove poor-quality recordings before training.
+
+### Export to Metadata
+
 ```bash
-cd scripts
-python wav_to_text.py audacity
+python scripts/export_metadata.py audacity \
+  --metadata-template metadata/metadata_template.csv
 ```
-The script generates a new file, `Label Track STT.csv`.
 
-### Fine-tune Transcriptions
-For **Audition**:
-* Delete all markers
-* Select `Import Markers from File` and select file with STT transcriptions: Markers_STT.csv
-* Fine-tune the Description field in Markers to exactly match the words spoken
+---
 
-For **Audacity**:
-* Open `Label Track STT.txt` in a text editor.
-* Fine-tune the Labels field in the text file to exactly match the words spoken
+## Pathway 3: Augment a Small Dataset
 
-### Export Markers (Audition only) and WAVs
-For **Audition**:
-* Select all markers in list
-* Select `Export Selected Markers to CSV` and save as Markers.csv
-* Select `Export Audio of Selected Range Markers` with the following options: 
-    * Check `Use marker names in filenames`
-    * Update Format to `WAV PCM`
-    * Update Sample Type `22050 Hz Mono, 16-bit`
-    * Use folder `wavs_export`
+**Notebook:** [notebooks/04_augmentation.ipynb](notebooks/04_augmentation.ipynb)
 
-For **Audacity**:
-* Select `Export multiple...`
-    * Format: WAV
-    * Options: Signed 16-bit PCM
-    * Split files based on Labels
-    * Name files using Label/Track Name
-    * Use folder `wavs_export`
+This pathway extends an existing authentic dataset without introducing synthetic voices. It is appropriate when a community has a small number of real recordings and needs more training data.
 
-### Convert Markers(Audition) or Labels(Audacity) into LJSpeech format
-Using the exported `Markers.csv`(Audition) or `Label Track STT.txt` (Audacity) and WAVs in wavs_export, [scripts/markersfile_to_metadata.py](scripts/markersfile_to_metadata.py) will create a metadata.csv and folder of WAVs to train your TTS model:
+> **Note:** The [Te Hiku Media](https://tehiku.nz/) approach of collecting 310+ hours from real speakers is the gold standard. Augmentation is a practical compromise, not a substitute for real recordings.
 
-For **Audition**:
+Techniques available: speed perturbation, pitch shifting, additive noise (white, brown, room impulse response).
+
+All augmented files are flagged in metadata with `provenance_note: "augmented from {source_id}"`.
+
+---
+
+## Metadata Schema
+
+Every recording gets structured provenance. See [docs/metadata_schema.md](docs/metadata_schema.md) for full field documentation.
+
+Template: [metadata/metadata_template.csv](metadata/metadata_template.csv)
+
+Key fields:
+
+| Field | Purpose |
+|---|---|
+| `consent_tier` | `open` / `community` / `restricted` |
+| `cultural_protocol` | Free text — e.g., "seasonal restriction: winter only" |
+| `knowledge_keeper_reviewed` | Boolean |
+| `exclude_from_training` | Boolean — keeps recording in archive but out of model |
+| `exclude_reason` | Required when `exclude_from_training` is true |
+
+---
+
+## Export to LJSpeech Format
+
+**Notebook:** [notebooks/05_export_ljspeech.ipynb](notebooks/05_export_ljspeech.ipynb)
+
+The final step packages reviewed, consented recordings into the [LJSpeech format](https://keithito.com/LJ-Speech-Dataset/) used by most TTS fine-tuning pipelines.
+
+Only recordings where `exclude_from_training == False` and `consent_tier` is `open` or `community` are included. Restricted and sacred recordings are preserved in the archive but never exported.
+
+---
+
+## Utilities
+
+### Upsample WAV files (16 kHz → 22050 Hz)
+
 ```bash
-python markersfile_to_metadata.py audition
-```
-
-For **Audacity**:
-```bash
-python markersfile_to_metadata.py audacity
-```
-
-### Sentence Lengths
-Run [scripts/wavdurations2csv.sh](scripts/wavdurations2csv.sh) to chart out sentence length and verify that you have a good distribution of WAV file lengths.
-
-***
-
-## Other Utilities
-
-### Upsample WAV file
-ffmpeg:![ffmpeg](assets/upsample_ffmpeg.png)
-resampy:![resampy](assets/upsample_resampy.png)
-We tested three methods to upsample WAV files from 16,000 to 22,050 Hz. After reviewing the spectrograms, we selected ffmpeg for upsampling as it includes another 2 KHz of high end information when compared to resampy. [scripts/resamplewav.sh](scripts/resamplewav.sh)
-```
 scripts/resamplewav.sh
 ```
 
+ffmpeg is used (not resampy) — it preserves more high-frequency content. See spectrograms in `assets/`.
+
+---
+
 ## References
-* Mozilla TTS: https://github.com/mozilla/TTS
-* Automating alignment, includes segment audio on silence, Google Speech API, and recognition alignment: https://github.com/carpedm20/multi-Speaker-tacotron-tensorflow#2-2-generate-korean-datasets
-* Pretraining on large synthetic corpuses and fine tuning on specific ones https://twitter.com/garygarywang
-* Datasheets for Datasets https://arxiv.org/abs/1803.09010
+
+- CARE Principles for Indigenous Data Governance: https://www.gida-global.org/care
+- Te Hiku Media Kaitiakitanga License: https://github.com/TeHikuMedia/Kaitiakitanga-License
+- Whisper (local speech recognition): https://github.com/openai/whisper
+- LJSpeech Dataset format: https://keithito.com/LJ-Speech-Dataset/
+- Datasheets for Datasets (Gebru et al.): https://arxiv.org/abs/1803.09010
+- Adapted Datasheet for Indigenous Datasets (OCAP®-based): [docs/adapted_datasheet_for_indigenous_datasets.md](docs/adapted_datasheet_for_indigenous_datasets.md)
+- Mozilla TTS: https://github.com/mozilla/TTS
