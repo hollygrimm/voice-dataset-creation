@@ -1,0 +1,535 @@
+ISO 639-3	Language Name	Region
+# ============================================================
+# MESOAMERICA (121 languages)
+# ============================================================
+knj	Akateko	Mesoamerica
+azg	Amuzgo, San Pedro Amuzgos	Mesoamerica
+caa	Ch'orti'	Mesoamerica
+cly	Chatino, Eastern Highland	Mesoamerica
+cya	Chatino, Nopala	Mesoamerica
+cco	Chinantec, Comaltepec	Mesoamerica
+cnl	Chinantec, Lalana	Mesoamerica
+cle	Chinantec, Lealao	Mesoamerica
+chz	Chinantec, Ozumacín	Mesoamerica
+cpa	Chinantec, Palantla	Mesoamerica
+cso	Chinantec, Sochiapam	Mesoamerica
+cnt	Chinantec, Tepetotutla	Mesoamerica
+cuc	Chinantec, Usila	Mesoamerica
+ctu	Chol	Mesoamerica
+chf	Chontal, Tabasco	Mesoamerica
+cac	Chuj	Mesoamerica
+crn	Cora, El Nayar	Mesoamerica
+cok	Cora, Santa Teresa	Mesoamerica
+hus	Huastec	Mesoamerica
+huv	Huave, San Mateo del Mar	Mesoamerica
+ixl	Ixil	Mesoamerica
+jac	Jakalteko	Mesoamerica
+quc	K'iche'	Mesoamerica
+cak	Kaqchikel	Mesoamerica
+lac	Lacandon	Mesoamerica
+mam	Mam	Mesoamerica
+mop	Maya, Mopán	Mesoamerica
+yua	Maya, Yucatec	Mesoamerica
+mfy	Mayo	Mesoamerica
+maz	Mazahua, Central	Mesoamerica
+vmy	Mazatec, Ayautla	Mesoamerica
+maq	Mazatec, Chiquihuitlán	Mesoamerica
+mzi	Mazatec, Ixcatlán	Mesoamerica
+maj	Mazatec, Jalapa de Díaz	Mesoamerica
+maa	Mazatec, San Jerónimo Tecóatl	Mesoamerica
+mco	Mixe, Coatlán	Mesoamerica
+mxq	Mixe, Juquila	Mesoamerica
+pxm	Mixe, Quetzaltepec	Mesoamerica
+mto	Mixe, Totontepec	Mesoamerica
+mim	Mixtec, Alacatlatzala	Mesoamerica
+xta	Mixtec, Alcozauca	Mesoamerica
+mbz	Mixtec, Amoltepec	Mesoamerica
+mip	Mixtec, Apasco-Apoala	Mesoamerica
+mib	Mixtec, Atatlahuca	Mesoamerica
+miy	Mixtec, Ayutla	Mesoamerica
+mih	Mixtec, Chayuco	Mesoamerica
+miz	Mixtec, Coatzospan	Mesoamerica
+xtd	Mixtec, Diuxi-Tilantongo	Mesoamerica
+mxt	Mixtec, Jamiltepec	Mesoamerica
+xtm	Mixtec, Magdalena Peñasco	Mesoamerica
+mxv	Mixtec, Metlatónoc	Mesoamerica
+xtn	Mixtec, Northern Tlaxiaco	Mesoamerica
+mie	Mixtec, Ocotepec	Mesoamerica
+mil	Mixtec, Peñoles	Mesoamerica
+mio	Mixtec, Pinotepa Nacional	Mesoamerica
+mdv	Mixtec, Santa Lucía Monteverde	Mesoamerica
+mza	Mixtec, Santa María Zacatepec	Mesoamerica
+mit	Mixtec, Southern Puebla	Mesoamerica
+mxb	Mixtec, Tezoatlán	Mesoamerica
+mpm	Mixtec, Yosondúa	Mesoamerica
+nch	Nahuatl, Central Huasteca	Mesoamerica
+nhe	Nahuatl, Eastern Huasteca	Mesoamerica
+ngu	Nahuatl, Guerrero	Mesoamerica
+azz	Nahuatl, Highland Puebla	Mesoamerica
+nhx	Nahuatl, Isthmus-Mecayapan	Mesoamerica
+ncl	Nahuatl, Michoacán	Mesoamerica
+nhy	Nahuatl, Northern Oaxaca	Mesoamerica
+ncj	Nahuatl, Northern Puebla	Mesoamerica
+nsu	Nahuatl, Sierra Negra	Mesoamerica
+npl	Nahuatl, Southeastern Puebla	Mesoamerica
+nuz	Nahuatl, Tlamacazapa	Mesoamerica
+nhw	Nahuatl, Western Huasteca	Mesoamerica
+nhi	Nahuatl, Zacatlán-Ahuacatlán-Tepetzintla	Mesoamerica
+ote	Otomi, Mezquital	Mesoamerica
+otq	Otomi, Querétaro	Mesoamerica
+pps	Popoloca, San Luís Temalacayuca	Mesoamerica
+pls	Popoloca, San Marcos Tlacoyalco	Mesoamerica
+poi	Popoluca, Highland	Mesoamerica
+poh	Poqomchi'	Mesoamerica
+tsz	Purepecha	Mesoamerica
+kjb	Q'anjob'al	Mesoamerica
+tac	Tarahumara, Western	Mesoamerica
+ttc	Tektiteko	Mesoamerica
+tee	Tepehua, Huehuetla	Mesoamerica
+tpp	Tepehua, Pisaflores	Mesoamerica
+tpt	Tepehua, Tlachichilco	Mesoamerica
+stp	Tepehuan, Southeastern	Mesoamerica
+toc	Totonac, Coyutla	Mesoamerica
+tos	Totonac, Highland	Mesoamerica
+trs	Triqui, Chicahuaxtla	Mesoamerica
+trc	Triqui, Copala	Mesoamerica
+tzj	Tz'utujil	Mesoamerica
+tzh	Tzeltal	Mesoamerica
+tzo	Tzotzil	Mesoamerica
+usp	Uspanteko	Mesoamerica
+zaq	Zapotec, Aloápam	Mesoamerica
+zpo	Zapotec, Amatlán	Mesoamerica
+zad	Zapotec, Cajonos	Mesoamerica
+zpc	Zapotec, Choapan	Mesoamerica
+zca	Zapotec, Coatecas Altas	Mesoamerica
+zpg	Zapotec, Guevea de Humboldt	Mesoamerica
+zai	Zapotec, Isthmus	Mesoamerica
+zpl	Zapotec, Lachixío	Mesoamerica
+zam	Zapotec, Miahuatlán	Mesoamerica
+zaw	Zapotec, Mitla	Mesoamerica
+zpm	Zapotec, Mixtepec	Mesoamerica
+zac	Zapotec, Ocotlán	Mesoamerica
+zao	Zapotec, Ozolotepec	Mesoamerica
+ztq	Zapotec, Quioquitani-Quierí	Mesoamerica
+zar	Zapotec, Rincón	Mesoamerica
+zpt	Zapotec, San Vicente Coatlán	Mesoamerica
+zpi	Zapotec, Santa María Quiegolani	Mesoamerica
+zas	Zapotec, Santo Domingo Albarradas	Mesoamerica
+zaa	Zapotec, Sierra de Juárez	Mesoamerica
+zpz	Zapotec, Texmelucan	Mesoamerica
+zab	Zapotec, Western Tlacolula Valley	Mesoamerica
+zpu	Zapotec, Yalálag	Mesoamerica
+zae	Zapotec, Yareni	Mesoamerica
+zty	Zapotec, Yatee	Mesoamerica
+zav	Zapotec, Yatzachi	Mesoamerica
+zos	Zoque, Francisco León	Mesoamerica
+cab	Garifuna	Mesoamerica/Caribbean
+# ============================================================
+# CENTRAL AMERICA (6 languages)
+# ============================================================
+sab	Buglere	Central America
+cjp	Cabécar	Central America
+miq	Mískito	Central America
+gym	Ngäbere	Central America
+tfr	Teribe	Central America
+jic	Tol	Central America
+# ============================================================
+# NORTH AMERICA (8 languages)
+# ============================================================
+crk	Cree, Plains	North America
+ojb	Ojibwa, Northwestern	North America
+pao	Paiute, Northern	North America
+tew	Tewa	North America
+dgr	Tlicho	North America
+ood	Tohono O'odham	North America
+ess	Yupik, Saint Lawrence Island	North America/Arctic
+gwi	Gwich'in	North America/Arctic
+# ============================================================
+# SOUTH AMERICA (125 languages)
+# ============================================================
+aca	Achagua	South America
+acr	Achi	South America
+acu	Achuar-Shiwiar	South America
+guq	Aché	South America
+cni	Asháninka	South America
+cjo	Ashéninka, Pajonal	South America
+cpu	Ashéninka, Pichis	South America
+cpb	Ashéninka, Ucayali-Yurúa	South America
+kwi	Awa-Cuaiquer	South America
+agr	Awajún	South America
+ayr	Aymara, Central	South America
+ayo	Ayoreo	South America
+boa	Bora	South America
+bor	Borôro	South America
+cbv	Cacua	South America
+kaq	Capanahua	South America
+cot	Caquinte	South America
+cbc	Carapana	South America
+car	Carib	South America
+cbi	Chachi	South America
+ceg	Chamacoco	South America
+cap	Chipaya	South America
+cax	Chiquitano	South America
+crq	Chorote, Iyo'wujwa	South America
+crt	Chorote, Iyojwa'ja	South America
+con	Cofán	South America
+cui	Cuiba	South America
+des	Desano	South America
+cto	Embera Catío	South America
+emp	Emberá, Northern	South America
+enx	Enxet	South America
+sja	Epena	South America
+mcq	Ese	South America
+ese	Ese Ejja	South America
+guh	Guahibo	South America
+gub	Guajajára	South America
+grn	Guarani	South America
+gyr	Guarayu	South America
+guo	Guayabero	South America
+ign	Ignaciano	South America
+inb	Inga	South America
+urb	Kaapor	South America
+cbr	Kakataibo-Kashibo	South America
+kay	Kamayurá	South America
+cbu	Kandozi-Chapra	South America
+cbs	Kashinawa	South America
+kyz	Kayabí	South America
+txu	Kayapó	South America
+coe	Koreguaje	South America
+cul	Kulina	South America
+kvn	Kuna, Border	South America
+cuk	Kuna, San Blas	South America
+myy	Macuna	South America
+mbc	Macushi	South America
+mcb	Matsigenka	South America
+gum	Misak	South America
+bmr	Muinane	South America
+nab	Nambikuára, Southern	South America
+pbb	Nasa	South America
+not	Nomatsigenga	South America
+pab	Parecís	South America
+pbc	Patamona	South America
+pad	Paumarí	South America
+pir	Piratapuyo	South America
+pui	Puinave	South America
+quy	Quechua, Ayacucho	South America
+qvc	Quechua, Cajamarca	South America
+quz	Quechua, Cusco	South America
+qve	Quechua, Eastern Apurímac	South America
+qub	Quechua, Huallaga	South America
+qvh	Quechua, Huamalíes-Dos de Mayo Huánuco	South America
+qwh	Quechua, Huaylas Ancash	South America
+qvw	Quechua, Huaylla Wanca	South America
+quf	Quechua, Lambayeque	South America
+qvm	Quechua, Margos-Yarowilca-Lauricocha	South America
+qul	Quechua, North Bolivian	South America
+qvn	Quechua, North Junín	South America
+qxn	Quechua, Northern Conchucos Ancash	South America
+qxh	Quechua, Panao	South America
+qvs	Quechua, San Martín	South America
+quh	Quechua, South Bolivian	South America
+qxo	Quechua, Southern Conchucos	South America
+qxr	Quichua, Cañar Highland	South America
+qvo	Quichua, Napo	South America
+qvz	Quichua, Northern Pastaza	South America
+qxl	Quichua, Salasaca Highland	South America
+quw	Quichua, Tena Lowland	South America
+xsu	Sanumá	South America
+mcd	Sharanahua	South America
+cbt	Shawi	South America
+shp	Shipibo-Conibo	South America
+jiv	Shuar	South America
+snn	Siona	South America
+sri	Siriano	South America
+tna	Tacana	South America
+ter	Terêna	South America
+tob	Toba	South America
+tmf	Toba-Maskoy	South America
+trn	Trinitario	South America
+tri	Trió	South America
+cof	Tsafiki	South America
+cas	Tsimané	South America
+tuo	Tucano	South America
+tuf	Tunebo, Central	South America
+tue	Tuyuca	South America
+ura	Urarina	South America
+bao	Waimaha	South America
+waw	Waiwai	South America
+hub	Wampís	South America
+gvc	Wanano	South America
+wap	Wapishana	South America
+wba	Warao	South America
+way	Wayana	South America
+guc	Wayuu	South America
+hto	Witoto, Minika	South America
+huu	Witoto, Murui	South America
+noa	Woun Meu	South America
+xer	Xerénte	South America
+yad	Yagua	South America
+yaa	Yaminahua	South America
+ame	Yanesha'	South America
+guu	Yanomamö	South America
+pib	Yine	South America
+ycn	Yucuna	South America
+yuz	Yuracare	South America
+# ============================================================
+# PACIFIC / OCEANIA (105 languages)
+# ============================================================
+ami	Amis	Pacific/Taiwan (Indigenous Formosan)
+tao	Yami	Pacific/Taiwan (Indigenous Formosan)
+amk	Ambai	Pacific/Melanesia
+mmg	Ambrym, North	Pacific/Melanesia
+boj	Anjam	Pacific/Melanesia
+apr	Arop-Lokep	Pacific/Melanesia
+aia	Arosi	Pacific/Melanesia
+msy	Aruamu	Pacific/Melanesia
+bvc	Baelelea	Pacific/Melanesia
+blz	Balantak	Pacific/Melanesia
+bjz	Baruga	Pacific/Melanesia
+bvz	Bauzi	Pacific/Melanesia
+bkd	Binukid	Pacific/Philippines
+bnp	Bola	Pacific/Melanesia
+ksr	Borong	Pacific/Melanesia
+bzh	Buang, Mapos	Pacific/Melanesia
+bgt	Bughotu	Pacific/Melanesia
+tte	Bwanabwana	Pacific/Melanesia
+dnt	Dani, Mid Grand Valley	Pacific/Melanesia
+dnw	Dani, Western	Pacific/Melanesia
+frd	Fordata	Pacific/Melanesia
+gbi	Galela	Pacific/Melanesia
+pwg	Gapapaiwa	Pacific/Melanesia
+nlg	Gela	Pacific/Melanesia
+gri	Ghari	Pacific/Melanesia
+had	Hatam	Pacific/Melanesia
+hvn	Hawu	Pacific/Melanesia
+hap	Hupla	Pacific/Melanesia
+imo	Imbongu	Pacific/Melanesia
+ipi	Ipili	Pacific/Melanesia
+kbq	Kamano	Pacific/Melanesia
+gam	Kandawo	Pacific/Melanesia
+pss	Kaulong	Pacific/Melanesia
+kyg	Keyagana	Pacific/Melanesia
+kij	Kilivila	Pacific/Melanesia
+geb	Kire	Pacific/Melanesia
+kje	Kisar	Pacific/Melanesia
+rop	Kriol	Pacific/Australia
+kpq	Korupun-Sela	Pacific/Melanesia
+kue	Kuman	Pacific/Melanesia
+kwd	Kwaio	Pacific/Melanesia
+tnk	Kwamera	Pacific/Melanesia
+kwf	Kwara'ae	Pacific/Melanesia
+kyc	Kyaka	Pacific/Melanesia
+lww	Lewo	Pacific/Melanesia
+llg	Lole	Pacific/Melanesia
+lex	Luang	Pacific/Melanesia
+mbh	Mangseng	Pacific/Melanesia
+mri	Maori	Pacific/New Zealand
+mah	Marshallese	Pacific/Micronesia
+klv	Maskelynes	Pacific/Melanesia
+met	Mato	Pacific/Melanesia
+med	Melpa	Pacific/Melanesia
+mee	Mengen	Pacific/Melanesia
+mej	Meyah	Pacific/Melanesia
+mpp	Migabac	Pacific/Melanesia
+mpx	Misima-Panaeati	Pacific/Melanesia
+mox	Molima	Pacific/Melanesia
+myl	Moma	Pacific/Melanesia
+mqf	Momuna	Pacific/Melanesia
+mtj	Moskona	Pacific/Melanesia
+nas	Naasioi	Pacific/Melanesia
+nlc	Nalca	Pacific/Melanesia
+lid	Nyindrou	Pacific/Melanesia
+ury	Orya	Pacific/Melanesia
+stn	Owa	Pacific/Melanesia
+pmf	Pamona	Pacific/Melanesia
+ata	Pele-Ata	Pacific/Melanesia
+pjt	Pitjantjatjara	Pacific/Australia
+rai	Ramoaaina	Pacific/Melanesia
+lje	Rampi	Pacific/Melanesia
+rap	Rapa Nui	Pacific/Polynesia
+rug	Roviana	Pacific/Melanesia
+apb	Sa'a	Pacific/Melanesia
+saj	Sahu	Pacific/Melanesia
+smo	Samoan	Pacific/Polynesia
+tvw	Sedoa	Pacific/Melanesia
+slu	Selaru	Pacific/Melanesia
+snp	Siane	Pacific/Melanesia
+mnx	Sougb	Pacific/Melanesia
+tgo	Sudest	Pacific/Melanesia
+tby	Tabaru	Pacific/Melanesia
+tbg	Tairora, North	Pacific/Melanesia
+omw	Tairora, South	Pacific/Melanesia
+tbc	Takia	Pacific/Melanesia
+tgp	Tangoa	Pacific/Melanesia
+tnn	Tanna, North	Pacific/Melanesia
+kps	Tehit	Pacific/Melanesia
+twe	Teiwa	Pacific/Melanesia
+twu	Termanu	Pacific/Melanesia
+txq	Tii	Pacific/Melanesia
+tnt	Tontemboan	Pacific/Melanesia
+sda	Toraja-Sa'dan	Pacific/Melanesia
+tcs	Torres Strait Creole	Pacific/Australia
+iou	Tuma-Irumu	Pacific/Melanesia
+ppk	Uma	Pacific/Melanesia
+ubu	Umbu-Ungu	Pacific/Melanesia
+urt	Urat	Pacific/Melanesia
+upv	Uripiv-Wala-Rano-Atchin	Pacific/Melanesia
+rro	Waima	Pacific/Melanesia
+tnp	Whitesands	Pacific/Melanesia
+yli	Yali, Angguruk	Pacific/Melanesia
+nlk	Yali, Ninia	Pacific/Melanesia
+jmd	Yamdena	Pacific/Melanesia
+yva	Yawa	Pacific/Melanesia
+byr	Yipma	Pacific/Melanesia
+# ============================================================
+# SIBERIA / ARCTIC (11 languages)
+# ============================================================
+ckt	Chukchi	Siberia/Arctic
+evn	Evenki	Siberia
+itl	Itelmen	Siberia
+kjh	Khakas	Siberia
+kca	Khanty	Siberia
+kpv	Komi-Zyrian	Siberia
+kpy	Koryak	Siberia
+gld	Nanai	Siberia
+cjs	Shor	Siberia
+sah	Yakut	Siberia
+# ============================================================
+# ASIA — INDIA (19 languages)
+# ============================================================
+bdv	Bodo Parja	Asia/India
+dso	Desiya	Asia/India
+mhu	Digaro-Mishmi	Asia/India
+gau	Gadaba, Mudhili	Asia/India
+grt	Garo	Asia/India
+hoc	Ho	Asia/India
+lbj	Ladakhi	Asia/India
+mjv	Mannan	Asia/India
+fmu	Muria, Far Western	Asia/India
+muv	Muthuvan	Asia/India
+kfw	Naga, Kharam	Asia/India
+nst	Naga, Tangshang	Asia/India
+peg	Pengo	Asia/India
+suv	Puroik	Asia/India
+rah	Rabha	Asia/India
+rnl	Ranglong	Asia/India
+sch	Sakachep	Asia/India
+sya	Siang	Asia/India
+adx	Tibetan, Amdo	Asia/Tibet-India
+# ============================================================
+# ASIA — NEPAL (9 languages)
+# ============================================================
+dhi	Dhimal	Asia/Nepal
+kle	Kulung	Asia/Nepal
+lif	Limbu	Asia/Nepal
+rjs	Rajbanshi	Asia/Nepal
+rav	Sampang	Asia/Nepal
+xsr	Sherpa	Asia/Nepal
+suz	Sunwar	Asia/Nepal
+taj	Tamang, Eastern	Asia/Nepal
+thl	Tharu, Dangaura	Asia/Nepal
+# ============================================================
+# ASIA — MYANMAR / SOUTHEAST ASIA (32 languages)
+# ============================================================
+acn	Achang	Asia/Myanmar-China
+aeu	Akeu	Asia/SE Asia
+ahk	Akha	Asia/SE Asia
+bdq	Bahnar	Asia/Vietnam
+blt	Tai Dam	Asia/Vietnam
+bzi	Bisu	Asia/SE Asia
+bru	Bru, Eastern	Asia/SE Asia
+bgr	Chin, Bawm	Asia/Myanmar
+cek	Chin, Eastern Khumi	Asia/Myanmar
+cfm	Chin, Falam	Asia/Myanmar
+cnh	Chin, Hakha	Asia/Myanmar
+hlt	Chin, Matu	Asia/Myanmar
+mwq	Chin, Müün	Asia/Myanmar
+ctd	Chin, Tedim	Asia/Myanmar
+tcz	Chin, Thado	Asia/Myanmar
+zyp	Chin, Zyphe	Asia/Myanmar
+kac	Jingpho	Asia/Myanmar
+pww	Karen, Pwo Northern	Asia/Myanmar
+kxf	Kawyaw	Asia/Myanmar
+kyu	Kayah, Western	Asia/Myanmar
+kjg	Khmu	Asia/SE Asia
+kxm	Khmer, Northern	Asia/SE Asia
+krr	Krung	Asia/SE Asia
+kdt	Kuay	Asia/SE Asia
+lhu	Lahu	Asia/SE Asia
+lcp	Lawa, Western	Asia/Thailand
+mhx	Lhao Vo	Asia/Myanmar
+lis	Lisu	Asia/SE Asia
+pce	Palaung, Ruching	Asia/Myanmar
+prt	Prai	Asia/SE Asia
+raw	Rawang	Asia/Myanmar
+ril	Riang Lang	Asia/Myanmar
+shn	Shan	Asia/Myanmar
+urk	Urak Lawoi'	Asia/SE Asia
+prk	Wa, Parauk	Asia/Myanmar
+atb	Zaiwa	Asia/Myanmar
+# ============================================================
+# ASIA — MALAYSIA / BORNEO (13 languages)
+# ============================================================
+bdh	Baka	Asia/Malaysia
+sne	Bidayuh, Bau	Asia/Malaysia
+bdg	Bonggi	Asia/Malaysia
+iba	Iban	Asia/Malaysia
+dbj	Ida'an	Asia/Malaysia
+dtp	Kadazan Dusun	Asia/Malaysia
+kqr	Kimaragang	Asia/Malaysia
+lnd	Lundayeh	Asia/Malaysia
+tih	Murut, Timugon	Asia/Malaysia
+pez	Penan, Eastern	Asia/Malaysia
+sea	Semai	Asia/Malaysia
+sza	Semelai	Asia/Malaysia
+txa	Tombonuo	Asia/Malaysia
+# ============================================================
+# ASIA — INDONESIA (9 languages)
+# ============================================================
+alp	Alune	Asia/Indonesia
+atq	Aralle-Tabulahan	Asia/Indonesia
+mvp	Duri	Asia/Indonesia
+kzf	Kaili, Da'a	Asia/Indonesia
+lew	Kaili, Ledo	Asia/Indonesia
+mwv	Mentawai	Asia/Indonesia
+mnb	Muna	Asia/Indonesia
+klw	Tado	Asia/Indonesia
+tdj	Tajio	Asia/Indonesia
+# ============================================================
+# ASIA — PHILIPPINES (35 languages)
+# ============================================================
+agn	Agutaynen	Asia/Philippines
+alj	Alangan	Asia/Philippines
+abp	Ayta, Abellen	Asia/Philippines
+blx	Ayta, Mag-Indi	Asia/Philippines
+sgb	Ayta, Mag-antsi	Asia/Philippines
+ubl	Bikol, Buhi'non	Asia/Philippines
+hnn	Hanunoo	Asia/Philippines
+ifa	Ifugao, Amganad	Asia/Philippines
+ifb	Ifugao, Batad	Asia/Philippines
+ifu	Ifugao, Mayoyao	Asia/Philippines
+ifk	Ifugao, Tuwali	Asia/Philippines
+itv	Itawit	Asia/Philippines
+juy	Juray	Asia/Philippines
+cgc	Kagayanen	Asia/Philippines
+kqe	Kalagan	Asia/Philippines
+kak	Kalanguya	Asia/Philippines
+kyb	Kalinga, Butbut	Asia/Philippines
+knb	Kalinga, Lubuagan	Asia/Philippines
+kmd	Kalinga, Majukayang	Asia/Philippines
+kml	Kalinga, Tanudan	Asia/Philippines
+ify	Kallahan, Keley-i	Asia/Philippines
+kne	Kankanaey	Asia/Philippines
+pam	Kapampangan	Asia/Philippines
+mbt	Manobo, Matigsalug	Asia/Philippines
+obo	Manobo, Obo	Asia/Philippines
+mbb	Manobo, Western Bukidnon	Asia/Philippines
+sjm	Mapun	Asia/Philippines
+plw	Palawano, Brooke's Point	Asia/Philippines
+pag	Pangasinan	Asia/Philippines
+sml	Sama, Central	Asia/Philippines
+suc	Subanon, Western	Asia/Philippines
+tbk	Tagbanwa, Calamian	Asia/Philippines
+twb	Tawbuid	Asia/Philippines
+tbl	Tboli	Asia/Philippines
+yka	Yakan	Asia/Philippines
