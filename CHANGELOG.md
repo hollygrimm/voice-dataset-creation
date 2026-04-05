@@ -23,9 +23,9 @@ The original repository used a single Google Cloud Speech-to-Text script (`wav_t
 
 | Old | New |
 |---|---|
-| `scripts/wav_to_text.py` (Google Cloud STT) | `notebooks/02a_transcribe_whisper.ipynb` (local Whisper) |
-| — | `notebooks/02b_transcribe_mms.ipynb` (local Meta MMS, for Cree syllabics, Ojibwe, Mi'kmaq, and others) |
-| — | `notebooks/02c_transcribe_manual.ipynb` (manual transcription workflow for languages not covered by either tool) |
+| `scripts/wav_to_text.py` (Google Cloud STT) | `notebooks/03a_transcribe_whisper.ipynb` (local Whisper) |
+| — | `notebooks/03b_transcribe_mms.ipynb` (local Meta MMS, for Cree syllabics, Ojibwe, Mi'kmaq, and others) |
+| — | `notebooks/03c_transcribe_manual.ipynb` (manual transcription workflow for languages not covered by either tool) |
 
 No audio leaves community infrastructure. No cloud credentials required.
 
@@ -43,8 +43,8 @@ No audio leaves community infrastructure. No cloud credentials required.
 
 ### Notebooks added
 
-- `notebooks/01_record_and_segment.ipynb` — Audacity recording workflow with routing table to 02a/02b/02c
-- `notebooks/03_snr_quality_analysis.ipynb` — migrated from Google Colab; runs locally; adds community framing around SNR as a quality gate, not the only gate
+- `notebooks/01_record_and_segment.ipynb` — Audacity recording workflow with routing table to 03a/03b/03c
+- `notebooks/02_snr_quality_analysis.ipynb` — migrated from Google Colab; runs locally; adds community framing around SNR as a quality gate, not the only gate
 - `notebooks/04_augmentation.ipynb` — speaker augmentation replacing synthetic voice generation
 - `notebooks/05_export_ljspeech.ipynb` — filters by `exclude_from_training` and `consent_tier` before export
 

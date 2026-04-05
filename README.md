@@ -1,28 +1,29 @@
 # Community Voice Dataset Creation
 
-This repository supports communities in building voice datasets for language preservation and AI development. It is a digital companion to the chapter "AI Techniques for Indigenous Cultural Expression" in the the book "Envisioning Indigenous Methods in Digital Media and Ecologies".
+This repository supports communities in building voice datasets for language preservation and AI development. It is a digital companion to the chapter "AI Techniques for Indigenous Cultural Expression" in the book "Envisioning Indigenous Methods in Digital Media and Ecologies".
 
 ```mermaid
 flowchart TD
     A([Start]) --> B[Community agreement]
-    B --> C[What not to digitize]
+    B --> B2[Indigenous datasheet]
+    B2 --> C[What not to digitize]
     C --> D{Existing\nrecordings?}
 
     D -->|No| P1[Record new audio]
-    D -->|Yes| P2[Transcribe existing]
+    D -->|Yes| P2[Mark and export segments]
 
     P1 --> SEG[Segment on silence]
-    SEG --> LANG
+    P2 --> SNR
 
-    P2 --> LANG{Language?}
-    LANG -->|Whisper| W[02a Whisper]
-    LANG -->|MMS| M[02b MMS]
-    LANG -->|Manual| MAN[02c Manual]
+    SEG --> SNR[SNR quality check]
+    SNR --> LANG{Language?}
+    LANG -->|Whisper| W[03a Whisper]
+    LANG -->|MMS| M[03b MMS]
+    LANG -->|Manual| MAN[03c Manual]
     W & M & MAN --> REV[Review transcripts]
     REV --> META
 
-    META[Fill metadata] --> SNR[SNR quality check]
-    SNR --> EMETA[Export metadata]
+    META[Fill metadata] --> EMETA[Export metadata]
     EMETA --> AUG{Dataset\ntoo small?}
 
     AUG -->|Yes| P3[Augment]
@@ -31,6 +32,24 @@ flowchart TD
 
     EXP[Export LJSpeech] --> DONE([Train TTS model])
 ```
+
+### Components
+
+| Component | Purpose |
+|-----------|---------|
+| **[Community Agreement](docs/community_agreement_template.md)** | Speaker consent template with ownership tiers and withdrawal rights |
+| **[Indigenous Datasheet](docs/adapted_datasheet_for_indigenous_datasets.md)** | OCAP®-based institutional governance for the dataset as a whole |
+| **[What Not to Digitize](docs/what_not_to_digitize.md)** | Decision framework for recordings that should not become training data |
+| **[01 Record & Segment](notebooks/01_record_and_segment.ipynb)** | Record audio, split on silence |
+| **[02 SNR Analysis](notebooks/02_snr_quality_analysis.ipynb)** | Signal-to-noise quality gate |
+| **[03a Whisper](notebooks/03a_transcribe_whisper.ipynb)** | Transcribe English, Spanish, Māori, etc. |
+| **[03b MMS](notebooks/03b_transcribe_mms.ipynb)** | Transcribe Cree syllabics, Ojibwe, Mi'kmaq, etc. |
+| **[03c Manual](notebooks/03c_transcribe_manual.ipynb)** | Manual transcription for unsupported languages |
+| **[04 Augmentation](notebooks/04_augmentation.ipynb)** | Speed, pitch, noise variations of consented recordings |
+| **[05 Export](notebooks/05_export_ljspeech.ipynb)** | Filter by consent tier, output LJSpeech format |
+| **[export_metadata.py](scripts/export_metadata.py)** | Merge markers with CARE metadata template |
+| **[segment_on_silence.py](scripts/segment_on_silence.py)** | Split long recordings into utterances |
+| **[batch_transcribe.py](scripts/batch_transcribe.py)** | CLI wrapper for Whisper batch processing |
 
 > Before beginning, read [docs/what_not_to_digitize.md](docs/what_not_to_digitize.md). Not all recordings should become training data. This is the most important decision in the workflow.
 
@@ -45,6 +64,7 @@ This repository is designed in alignment with the [CARE Principles for Indigenou
 ## Table of Contents
 
 - [Community Voice Dataset Creation](#community-voice-dataset-creation)
+    - [Components](#components)
   - [Guiding Principles](#guiding-principles)
   - [Table of Contents](#table-of-contents)
   - [Setup](#setup)
@@ -53,11 +73,11 @@ This repository is designed in alignment with the [CARE Principles for Indigenou
     - [Recording Requirements](#recording-requirements)
     - [Segment and Label](#segment-and-label)
     - [Check Sentence Lengths](#check-sentence-lengths)
+    - [Analyze SNR and Transcribe](#analyze-snr-and-transcribe)
   - [Pathway 2: Transcribe Existing Recordings](#pathway-2-transcribe-existing-recordings)
     - [Mark and Export](#mark-and-export)
-    - [Transcribe with Whisper](#transcribe-with-whisper)
-    - [Review and Correct Transcriptions](#review-and-correct-transcriptions)
     - [Analyze Signal-to-Noise Ratio](#analyze-signal-to-noise-ratio)
+    - [Transcribe](#transcribe)
     - [Export to Metadata](#export-to-metadata)
   - [Pathway 3: Augment a Small Dataset](#pathway-3-augment-a-small-dataset)
   - [Metadata Schema](#metadata-schema)
@@ -130,19 +150,15 @@ python scripts/segment_on_silence.py --input recording.wav --output-dir test_dat
 scripts/wavdurations2csv.sh
 ```
 
+### Analyze SNR and Transcribe
+
+Run [notebooks/02_snr_quality_analysis.ipynb](notebooks/02_snr_quality_analysis.ipynb) to check audio quality, then choose a transcription notebook from the [Pathway 2 language table](#transcribe) below.
+
 ---
 
 ## Pathway 2: Transcribe Existing Recordings
 
 This pathway is for communities digitizing existing recordings (cassettes, reel-to-reel, field recordings). All transcription runs locally — no audio leaves community infrastructure.
-
-Choose the notebook for your language:
-
-| Language | Notebook |
-|---|---|
-| English, Spanish, Māori, or other [Whisper-supported language](https://github.com/openai/whisper#available-models-and-languages) | [notebooks/02a_transcribe_whisper.ipynb](notebooks/02a_transcribe_whisper.ipynb) |
-| Navajo or other language in the [MMS list](https://dl.fbaipublicfiles.com/mms/misc/language_coverage_mms.html) | [notebooks/02b_transcribe_mms.ipynb](notebooks/02b_transcribe_mms.ipynb) |
-| Language not covered by either tool, or community prefers manual | [notebooks/02c_transcribe_manual.ipynb](notebooks/02c_transcribe_manual.ipynb) |
 
 ### Mark and Export
 
@@ -152,7 +168,17 @@ Follow the same Audacity segmentation steps from Pathway 1, or use Adobe Auditio
 
 ### Analyze Signal-to-Noise Ratio
 
-Run [notebooks/03_snr_quality_analysis.ipynb](notebooks/03_snr_quality_analysis.ipynb) to identify and remove poor-quality recordings before training.
+Run [notebooks/02_snr_quality_analysis.ipynb](notebooks/02_snr_quality_analysis.ipynb) to identify and remove poor-quality recordings before transcribing.
+
+### Transcribe
+
+Choose the notebook for your language:
+
+| Language | Notebook |
+|---|---|
+| English, Spanish, Māori, or other [Whisper-supported language](https://github.com/openai/whisper#available-models-and-languages) | [notebooks/03a_transcribe_whisper.ipynb](notebooks/03a_transcribe_whisper.ipynb) |
+| Plains Cree or other language in the [MMS list](https://dl.fbaipublicfiles.com/mms/misc/language_coverage_mms.html) | [notebooks/03b_transcribe_mms.ipynb](notebooks/03b_transcribe_mms.ipynb) |
+| Language not covered by either tool, or community prefers manual | [notebooks/03c_transcribe_manual.ipynb](notebooks/03c_transcribe_manual.ipynb) |
 
 ### Export to Metadata
 
