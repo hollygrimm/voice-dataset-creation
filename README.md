@@ -40,10 +40,11 @@ flowchart TD
 | **[Community Agreement](docs/community_agreement_template.md)** | Speaker consent template with ownership tiers and withdrawal rights |
 | **[Indigenous Datasheet](docs/adapted_datasheet_for_indigenous_datasets.md)** | OCAP®-based institutional governance for the dataset as a whole |
 | **[What Not to Digitize](docs/what_not_to_digitize.md)** | Decision framework for recordings that should not become training data |
+| **[What Not to Train On](docs/what_not_to_train_on.md)** | Extends the framework to images, text, and cultural artifacts |
 | **[01 Record & Segment](notebooks/01_record_and_segment.ipynb)** | Record audio, split on silence |
 | **[02 SNR Analysis](notebooks/02_snr_quality_analysis.ipynb)** | Signal-to-noise quality gate |
 | **[03a Whisper](notebooks/03a_transcribe_whisper.ipynb)** | Transcribe English, Spanish, Māori, etc. |
-| **[03b MMS](notebooks/03b_transcribe_mms.ipynb)** | Transcribe Cree syllabics, Ojibwe, Mi'kmaq, etc. |
+| **[03b MMS](notebooks/03b_transcribe_mms.ipynb)** | Transcribe Cree syllabics, Ojibwe, O'odham, etc. ([530+ languages](docs/mms_indigenous_languages.tsv)) |
 | **[03c Manual](notebooks/03c_transcribe_manual.ipynb)** | Manual transcription for unsupported languages |
 | **[04 Augmentation](notebooks/04_augmentation.ipynb)** | Speed, pitch, noise variations of consented recordings |
 | **[05 Export](notebooks/05_export_ljspeech.ipynb)** | Filter by consent tier, output LJSpeech format |
@@ -84,6 +85,7 @@ This repository is designed in alignment with the [CARE Principles for Indigenou
   - [Export to LJSpeech Format](#export-to-ljspeech-format)
   - [Utilities](#utilities)
     - [Upsample WAV files (16 kHz → 22050 Hz)](#upsample-wav-files-16-khz--22050-hz)
+  - [Teaching Materials](#teaching-materials)
   - [References](#references)
 
 ---
@@ -240,6 +242,19 @@ scripts/resamplewav.sh
 ```
 
 ffmpeg is used (not resampy) — it preserves more high-frequency content. See spectrograms in `assets/`.
+
+---
+
+## Teaching Materials
+
+The `teaching/` directory contains course materials developed for AI Ethics courses.
+
+| Notebook | Purpose |
+|---|---|
+| **[Student Protocol Exercise](teaching/06_student_protocol_exercise.ipynb)** | Design exercise: draft a community agreement, categorize hypothetical recordings, build a metadata schema (no audio tools required) |
+| **[Consent-Tier Filtering Demo](teaching/consent_tier_filtering_demo.ipynb)** | Shows how governance decisions become a DataFrame filter at export time |
+
+These notebooks reference the same docs and metadata used by the pipeline but can be run independently with only `pandas`.
 
 ---
 
