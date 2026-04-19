@@ -1,8 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Write a pipe-separated filename|duration CSV for every .wav in the CWD.
+set -euo pipefail
 
-echo "filename|duration" > wavdurations.csv;
+out="wavdurations.csv"
+echo "filename|duration" > "$out"
 
+shopt -s nullglob
 for file in *.wav; do
-    duration=$(eval soxi -D "$file");
-    echo "${file}|$duration" >> wavdurations.csv;
+    duration=$(soxi -D -- "$file")
+    printf '%s|%s\n' "$file" "$duration" >> "$out"
 done
