@@ -26,48 +26,53 @@ def segment(
 ) -> None:
     try:
         from pydub import AudioSegment
-        from pydub.silence import split_on_silence
+        from pydub.silence import detect_nonsilent
     except ImportError:
-        print("pydub is not installed. Run: uv pip install pydub", file=sys.stderr)
+        print("pydub is not installed. Run: uv sync --extra dev", file=sys.stderr)
         sys.exit(1)
 
     print(f"Loading {input_path}...")
     audio = AudioSegment.from_wav(input_path)
+    total_ms = len(audio)
 
     print(
-        f"Splitting on silence (min_silence_len={min_silence_len}ms, "
+        f"Detecting non-silent regions (min_silence_len={min_silence_len}ms, "
         f"silence_thresh={silence_thresh}dBFS)..."
     )
-    chunks = split_on_silence(
+    regions = detect_nonsilent(
         audio,
         min_silence_len=min_silence_len,
         silence_thresh=silence_thresh,
-        keep_silence=keep_silence,
     )
 
-    if not chunks:
+    if not regions:
         print("No segments found. Try lowering --silence-thresh or --min-silence-len.")
         sys.exit(1)
 
     os.makedirs(output_dir, exist_ok=True)
     label_lines = []
-    cursor_ms = 0
 
-    for i, chunk in enumerate(chunks, start=1):
+    for i, (start_ms, end_ms) in enumerate(regions, start=1):
+        # Pad each region by keep_silence ms on both sides, clamped to file bounds.
+        pad_start = max(0, start_ms - keep_silence)
+        pad_end = min(total_ms, end_ms + keep_silence)
+
+        chunk = audio[pad_start:pad_end]
         filename = f"{i}.wav"
         filepath = os.path.join(output_dir, filename)
         chunk.export(filepath, format="wav")
 
-        start_s = cursor_ms / 1000.0
-        end_s = (cursor_ms + len(chunk)) / 1000.0
+        # Label offsets reference the ORIGINAL recording, so they stay accurate
+        # when the operator opens the source WAV in Audacity.
+        start_s = pad_start / 1000.0
+        end_s = pad_end / 1000.0
         label_lines.append(f"{start_s:.6f}\t{end_s:.6f}\t{i}")
-        cursor_ms += len(chunk)
 
     label_path = os.path.join(output_dir, "Label Track.txt")
     with open(label_path, "w", encoding="utf-8") as f:
         f.write("\n".join(label_lines) + "\n")
 
-    print(f"Exported {len(chunks)} segments to {output_dir}/")
+    print(f"Exported {len(regions)} segments to {output_dir}/")
     print(f"Label file written to {label_path}")
 
 
