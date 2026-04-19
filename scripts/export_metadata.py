@@ -96,6 +96,7 @@ def run(
     output_filename: str,
     metadata_template: str | None,
     ljspeech: bool,
+    clean: bool = False,
 ) -> None:
     markers = load_marker_file(file_type, input_filename)
 
@@ -106,7 +107,17 @@ def run(
             template_df = template_df.set_index("file_id")
 
     if os.path.exists(wavs_final_path):
-        rmtree(wavs_final_path)
+        existing = [f for f in os.listdir(wavs_final_path) if f.endswith(".wav")]
+        if existing and not clean:
+            print(
+                f"ERROR: {wavs_final_path} contains {len(existing)} .wav files. "
+                "Use --clean to remove them, or choose a different --wavs-final-path.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        if clean and existing:
+            print(f"Removing {len(existing)} existing files from {wavs_final_path}...")
+            rmtree(wavs_final_path)
     os.makedirs(wavs_final_path, exist_ok=True)
 
     care_rows = []
@@ -135,13 +146,15 @@ def run(
         care_rows.append(build_care_row(file_id, transcript, template_row))
 
         if ljspeech:
-            exclude = False
+            # Opt-in: a row is exported only if the template explicitly records
+            # consent_tier=open or community. Missing template rows, restricted
+            # consent, or exclude_from_training=true all exclude the file.
+            include = False
             if template_row is not None:
-                exclude = str(template_row.get("exclude_from_training", "false")).lower() == "true"
-                consent = str(template_row.get("consent_tier", "open")).lower()
-                if consent == "restricted":
-                    exclude = True
-            if not exclude:
+                excluded = str(template_row.get("exclude_from_training", "false")).lower() == "true"
+                consent = str(template_row.get("consent_tier", "")).lower()
+                include = (consent in {"open", "community"}) and not excluded
+            if include:
                 ljspeech_lines.append(f"{file_id}|{transcript}|{transcript}")
 
     out_df = pd.DataFrame(care_rows, columns=CARE_COLUMNS)
@@ -193,6 +206,11 @@ def main() -> None:
             action="store_true",
             help="Also export an LJSpeech-format CSV (filtered by consent_tier and exclude_from_training)",
         )
+        p.add_argument(
+            "--clean",
+            action="store_true",
+            help="Remove existing .wav files from --wavs-final-path before copying (default: refuse and exit).",
+        )
 
     args = parser.parse_args()
     run(
@@ -203,6 +221,7 @@ def main() -> None:
         output_filename=args.output_filename,
         metadata_template=args.metadata_template,
         ljspeech=args.ljspeech,
+        clean=args.clean,
     )
 
 
