@@ -118,6 +118,10 @@ class TestRunAudacity:
                 "recorded_by", "recording_date", "provenance_note",
             ])
             writer.writeheader()
+            writer.writerow({"file_id": "1", "consent_tier": "open",
+                             "exclude_from_training": "false"})
+            writer.writerow({"file_id": "2", "consent_tier": "open",
+                             "exclude_from_training": "false"})
             writer.writerow({"file_id": "3", "consent_tier": "open",
                              "exclude_from_training": "true",
                              "exclude_reason": "test exclusion"})
