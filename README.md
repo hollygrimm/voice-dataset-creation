@@ -4,10 +4,13 @@ This repository supports communities in building voice datasets for language pre
 
 ```mermaid
 flowchart TD
+    accTitle: Community voice dataset creation workflow
+    accDescr: Decision flowchart beginning with community agreement and Indigenous datasheet, proceeding through the what-not-to-digitize and what-not-to-train-on ethical frameworks, branching into recording new audio or marking existing recordings, then SNR quality check, language-based transcription via Whisper, MMS, or manual, followed by transcript review, metadata entry and export, optional augmentation for small datasets, and finally LJSpeech export with a decision point to either train a TTS model or archive for preservation.
     A([Start]) --> B[Community agreement]
     B --> B2[Indigenous datasheet]
     B2 --> C[What not to digitize]
-    C --> D{Existing\nrecordings?}
+    C --> C2[What not to train on]
+    C2 --> D{Existing\nrecordings?}
 
     D -->|No| P1[Record new audio]
     D -->|Yes| P2[Mark and export segments]
@@ -30,7 +33,9 @@ flowchart TD
     AUG -->|No| EXP
     P3 --> EXP
 
-    EXP[Export LJSpeech] --> DONE([Train TTS model])
+    EXP[Export LJSpeech] --> TRAIN_Q{Train model?}
+    TRAIN_Q -->|Yes| DONE([Train TTS model])
+    TRAIN_Q -->|No| ARCHIVE([Archive for preservation])
 ```
 
 ### Components

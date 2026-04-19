@@ -48,6 +48,17 @@ Speakers may assign a different tier to individual recordings.
 
 ---
 
+## Data Augmentation
+
+To increase dataset size without adding synthetic voices, recordings may be processed to create modified copies — speed perturbation, pitch shifting, or added background noise. These copies are flagged in the metadata with a `provenance_note` and inherit the same access tier as the original recording.
+
+- [ ] Augmentation is permitted for my recordings
+- [ ] Augmentation is not permitted for my recordings
+
+*(See [notebooks/04_augmentation.ipynb](../notebooks/04_augmentation.ipynb) for the specific techniques used.)*
+
+---
+
 ## Cultural Protocols
 
 Some recordings may have cultural restrictions that exist outside this document — seasonal availability, ceremonial context, gender-specific knowledge, or other protocols. These should be noted in the metadata field `cultural_protocol` for each recording.
@@ -91,7 +102,7 @@ The recordings will **not** be:
 - [ ] Used to train models for purposes other than those listed above
 - [ ] Processed by services that require audio to be uploaded to external servers
 
-*(This project uses [Whisper](https://github.com/openai/whisper) for transcription, which runs locally. No audio is sent to any third-party service.)*
+*(This project transcribes audio locally using [Whisper](https://github.com/openai/whisper), Meta's [MMS](https://ai.meta.com/blog/multilingual-model-speech-recognition/), or manual transcription — depending on the language. No audio is sent to any third-party service.)*
 
 ---
 
@@ -106,6 +117,8 @@ Speaker ID (for metadata — can be anonymous): _______________________________
 Preferred language/dialect for recordings: _______________________________
 
 Access tier for my recordings: _______________________________
+
+Augmentation permitted: **[ ] Yes [ ] No**
 
 Cultural protocol notes: _______________________________
 

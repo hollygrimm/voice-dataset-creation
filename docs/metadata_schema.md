@@ -108,6 +108,22 @@ For `restricted` recordings, this should always be `true` before the recording i
 
 ---
 
+### `augmentation_permitted`
+
+**Type:** boolean (`true` / `false`)
+**Required:** yes
+**Default:** `false` (opt-in, not opt-out)
+
+Whether the speaker (or community, per the ownership model) has consented to data augmentation — speed perturbation, pitch shifting, or additive noise — being applied to this recording.
+
+Set from the speaker's choice documented in the [Community Data Agreement](community_agreement_template.md) ("Augmentation permitted: Yes / No").
+
+The augmentation notebook ([notebooks/04_augmentation.ipynb](../notebooks/04_augmentation.ipynb)) filters on this field: recordings with `augmentation_permitted=false` or a missing value are not augmented. Augmented derivative rows inherit `true` from their source (they would not exist otherwise).
+
+This field has no effect on LJSpeech export — the original recording is still eligible for training based on `consent_tier` and `exclude_from_training`. `augmentation_permitted` only governs whether *derivative copies* are created.
+
+---
+
 ### `exclude_from_training`
 
 **Type:** boolean (`true` / `false`)

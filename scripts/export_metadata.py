@@ -34,6 +34,7 @@ CARE_COLUMNS = [
     "consent_tier",
     "cultural_protocol",
     "knowledge_keeper_reviewed",
+    "augmentation_permitted",
     "exclude_from_training",
     "exclude_reason",
     "recorded_by",

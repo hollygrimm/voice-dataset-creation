@@ -23,7 +23,7 @@ The [CARE Principles for Indigenous Data Governance](https://www.gida-global.org
 
 **How this repo enacts it:**
 
-- **No audio leaves the community's infrastructure.** Transcription runs locally via [Whisper](https://github.com/openai/whisper). The original repository used Google Cloud Speech-to-Text, which required audio to be uploaded to a third-party server. This dependency has been removed entirely.
+- **No audio leaves the community's infrastructure.** Transcription runs locally via [Whisper](https://github.com/openai/whisper), Meta's [MMS](https://ai.meta.com/blog/multilingual-model-speech-recognition/) for Indigenous languages Whisper does not cover, or manual transcription for languages neither model supports. The original repository used Google Cloud Speech-to-Text, which required audio to be uploaded to a third-party server. This dependency has been removed entirely.
 - The `exclude_from_training` boolean gives communities a clear mechanism to include recordings in an archive for cultural preservation while preventing them from ever entering a training pipeline.
 - The [Community Data Agreement template](docs/community_agreement_template.md) establishes speaker ownership explicitly before any recording session begins.
 - The `knowledge_keeper_reviewed` field creates a formal checkpoint: community experts, not just technical operators, have authority over what is finalized.
