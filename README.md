@@ -5,7 +5,7 @@ This repository supports communities in building voice datasets for language pre
 ```mermaid
 flowchart TD
     accTitle: Community voice dataset creation workflow
-    accDescr: Decision flowchart beginning with community agreement and Indigenous datasheet, proceeding through the what-not-to-digitize and what-not-to-train-on ethical frameworks, branching into recording new audio or marking existing recordings, then SNR quality check, language-based transcription via Whisper, MMS, or manual, followed by transcript review, metadata entry and export, optional augmentation for small datasets, and finally LJSpeech export with a decision point to either train a TTS model or archive for preservation.
+    accDescr: Decision flowchart beginning with community agreement and Indigenous datasheet, proceeding through the what-not-to-digitize and what-not-to-train-on ethical frameworks, branching into recording new audio or loading existing recordings, then a segmentation decision point for script-based silence detection or manual marking in Audacity, then SNR quality check, language-based transcription via Whisper, MMS, or manual, followed by transcript review, metadata entry and export, optional augmentation for small datasets, and finally LJSpeech export with a decision point to either train a TTS model or archive for preservation.
     A([Start]) --> B[Community agreement]
     B --> B2[Indigenous datasheet]
     B2 --> C[What not to digitize]
@@ -13,12 +13,14 @@ flowchart TD
     C2 --> D{Existing\nrecordings?}
 
     D -->|No| P1[Record new audio]
-    D -->|Yes| P2[Mark and export segments]
+    D -->|Yes| SEG
 
-    P1 --> SEG[Segment on silence]
-    P2 --> SNR
+    P1 --> SEG{Segmentation\nmethod?}
 
-    SEG --> SNR[SNR quality check]
+    SEG -->|Script| SEG1[Segment on silence]
+    SEG -->|Manual| SEG2[Mark and export]
+    SEG1 --> SNR[SNR quality check]
+    SEG2 --> SNR
     SNR --> LANG{Language?}
     LANG -->|Whisper| W[03a Whisper]
     LANG -->|MMS| M[03b MMS]
