@@ -55,7 +55,7 @@ flowchart TD
 | **[05 Export](notebooks/05_export_ljspeech.ipynb)** | Filter by consent tier, output LJSpeech format |
 | **[export_metadata.py](scripts/export_metadata.py)** | Merge markers with CARE metadata template |
 | **[segment_on_silence.py](scripts/segment_on_silence.py)** | Split long recordings into utterances |
-| **[batch_transcribe.py](scripts/batch_transcribe.py)** | CLI wrapper for Whisper batch processing |
+| **[batch_transcribe_whisper.py](scripts/batch_transcribe_whisper.py)** | CLI wrapper for Whisper batch processing |
 
 > Before beginning, read [docs/what_not_to_digitize.md](docs/what_not_to_digitize.md). Not all recordings should become training data. This is the most important decision in the workflow.
 
