@@ -258,7 +258,7 @@ The `teaching/` directory contains course materials developed for AI Ethics cour
 
 | Notebook | Purpose |
 |---|---|
-| **[Student Protocol Exercise](teaching/06_student_protocol_exercise.ipynb)** | Design exercise: draft a community agreement, categorize hypothetical recordings, build a metadata schema (no audio tools required) |
+| **[Designing an Ethical Data Protocol](teaching/ethical_protocol_exercise.ipynb)** | Design exercise: draft a community agreement, categorize hypothetical recordings, build a metadata schema (no audio tools required) |
 | **[Consent-Tier Filtering Demo](teaching/consent_tier_filtering_demo.ipynb)** | Shows how governance decisions become a DataFrame filter at export time |
 
 These notebooks reference the same docs and metadata used by the pipeline but can be run independently with only `pandas`.
