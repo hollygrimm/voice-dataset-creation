@@ -1,8 +1,9 @@
 # KERIA / ACDC Voice Consent Integration — Design
 
 **Status:** Draft, design only. Not implemented.
-**Branch:** `design/keria-acdc-consent`
-**Companion stack:** [matou-app](https://github.com/matou-dao/) (Go backend + signify-ts frontend + KERIA agent)
+**Companion stack:** [matou-app](https://github.com/matou-collective/matou-app) (Go backend + signify-ts frontend + KERIA agent)
+
+> **Incorporated into M2.** This VoiceConsentCredential schema and its invariants (nonce-required, sacred-excluded, revocation-as-registry-event, tighten-always/loosen-never) are reproduced in full in the M2 On-Chain Data Governance design doc — `tauhokohoko/deliverables/m2-onchain-governance/design-doc.md` §3.0 — which is the complete, self-contained spec for Mātou's review. **Keep the two in sync** when this schema changes.
 
 ---
 
@@ -14,7 +15,7 @@ Today, speaker consent is recorded as a row in `metadata/metadata_template.csv` 
 - **No revocation event log.** A speaker who withdraws consent leaves no auditable trace. The CSV row simply changes (or doesn't).
 - **No portability.** A speaker contributing to two community projects has no way to carry their consent posture between them without re-signing on paper.
 
-KERI ([Key Event Receipt Infrastructure](https://keri.one/)) and ACDC ([Authentic Chained Data Containers](https://trustoverip.github.io/tswg-acdc-specification/)) provide a community-controlled cryptographic substrate for these claims. Pairing this repository's CSV workflow with the [matou-app](https://github.com/matou-dao/) credential infrastructure means consent decisions become signed, registered, and revocable through the same mechanisms communities already use for organizational membership credentials.
+KERI ([Key Event Receipt Infrastructure](https://keri.one/)) and ACDC ([Authentic Chained Data Containers](https://trustoverip.github.io/tswg-acdc-specification/)) provide a community-controlled cryptographic substrate for these claims. Pairing this repository's CSV workflow with the [matou-app](https://github.com/matou-collective/matou-app) credential infrastructure means consent decisions become signed, registered, and revocable through the same mechanisms communities already use for organizational membership credentials.
 
 This design is consistent with CARE Principle **A** (*Authority to Control*): the credential is issued by the community's AID, lives in a registry the community operates, and can be revoked by community action — none of which requires trusting this repository's CSV files or the operator who maintains them.
 
@@ -214,9 +215,13 @@ When `--matou-url` is omitted the existing CSV-only behavior is preserved. The K
 
 **Recommendation:** Option 2 for the milestone, option 1 as a follow-up if voice-consent proves the polymorphic-Data pattern useful for other schemas.
 
+**Answered (Ben Tairea, June 2026 M2 review):** Ben prefers Option 1 long term and will implement Option 2 in the short term, which matches the recommendation.
+
 **Q2 — Schema SAID registration.** Where does `VOICE_CONSENT_SCHEMA_SAID` get its value? Does matou-app have a flow for registering and SAIDing a new schema, or is that a manual signify-ts/keripy step? The integration depends on having a stable SAID before any credentials can be issued.
 
 **Q3 — Revocation surfacing.** The matou-app HTTP API as it stands returns credentials from `anystore` — does the `Verified` field on `CachedCredential` (set at store time, see `credentials.go:116`) reflect ongoing registry state, or only the state at storage? The voice path needs *current* revocation status, not "was valid when first stored." If matou-app needs a `/api/v1/credentials/{said}/status` endpoint that re-checks the registry, that's a request to flag now.
+
+**Answered (Ben Tairea, June 2026 M2 review):** credential status is managed directly by KERIA's transaction event log (TEL) registry, which handles issuance and revocation. No separate matou-app status endpoint is needed; verifiers check the registry.
 
 **Q4 — Withdrawal UX.** When a speaker withdraws, the matou-app frontend (signify-ts) needs to issue a revocation event. Does that flow exist for role credentials today, and is it generalizable, or does VoiceConsentCredential need its own withdrawal UI?
 
@@ -233,12 +238,12 @@ When `--matou-url` is omitted the existing CSV-only behavior is preserved. The K
 
 ---
 
-## 7. Implementation milestones (when this design is approved)
+## 7. Implementation phases (when this design is approved)
 
-1. **M1 — Schema registration.** Lock the schema, get a SAID, document it in `metadata/voice_consent_credential.schema.json`.
-2. **M2 — `scripts/keri_consent.py`.** HTTP client, `VoiceConsent` dataclass, fetch + revocation filter. Unit tests against a recorded HTTP fixture.
-3. **M3 — `export_metadata.py` integration.** `--matou-url` and `--project-id` flags, tightening enforcement, hard-error on loosening attempts. Tests cover credential-present, credential-absent, revoked, and loosen-attempt cases.
-4. **M4 — Documentation.** Update `metadata_schema.md`, `community_agreement_template.md`, and the README workflow diagram to surface the optional credential path.
-5. **M5 — End-to-end smoke test.** A full notebook walk-through against a local matou-app instance with a hand-issued VoiceConsentCredential.
+1. **Phase 1 — Schema registration.** Lock the schema, get a SAID, document it in `metadata/voice_consent_credential.schema.json`.
+2. **Phase 2 — `scripts/keri_consent.py`.** HTTP client, `VoiceConsent` dataclass, fetch + revocation filter. Unit tests against a recorded HTTP fixture.
+3. **Phase 3 — `export_metadata.py` integration.** `--matou-url` and `--project-id` flags, tightening enforcement, hard-error on loosening attempts. Tests cover credential-present, credential-absent, revoked, and loosen-attempt cases.
+4. **Phase 4 — Documentation.** Update `metadata_schema.md`, `community_agreement_template.md`, and the README workflow diagram to surface the optional credential path.
+5. **Phase 5 — End-to-end smoke test.** A full notebook walk-through against a local matou-app instance with a hand-issued VoiceConsentCredential.
 
-Milestones are sequential except M4 may run in parallel with M3.
+Phases are sequential except Phase 4 may run in parallel with Phase 3. They are numbered as phases to avoid confusion with the Tauhokohoko project milestones (M1, M2, and the proposed M3–M5).
