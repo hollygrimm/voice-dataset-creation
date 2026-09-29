@@ -1,6 +1,6 @@
 # KERIA / ACDC Voice Consent Integration — Design
 
-**Status:** Draft, design only. Not implemented.
+**Status:** Draft, design only. Not implemented. To be superseded by the planned M3 governance engine design once approved. In that design the exporter requests an access grant from a governance engine in matou-app, instead of reading consent credentials directly as described in §4.
 **Companion stack:** [matou-app](https://github.com/matou-collective/matou-app) (Go backend + signify-ts frontend + KERIA agent)
 
 > **Incorporated into M2.** This VoiceConsentCredential schema and its invariants (nonce-required, sacred-excluded, revocation-as-registry-event, tighten-always/loosen-never) are reproduced in full in the M2 On-Chain Data Governance design doc — `tauhokohoko/deliverables/m2-onchain-governance/design-doc.md` §3.0 — which is the complete, self-contained spec for Mātou's review. **Keep the two in sync** when this schema changes.
@@ -84,7 +84,7 @@ ACDC credentials carry a `s` (schema) field whose value is the SAID of a JSON-Sc
     }
   },
   "additionalProperties": false,
-  "required": ["v", "d", "i", "ri", "s", "a"]
+  "required": ["v", "d", "u", "i", "ri", "s", "a"]
 }
 ```
 
@@ -219,6 +219,8 @@ When `--matou-url` is omitted the existing CSV-only behavior is preserved. The K
 
 **Q2 — Schema SAID registration.** Where does `VOICE_CONSENT_SCHEMA_SAID` get its value? Does matou-app have a flow for registering and SAIDing a new schema, or is that a manual signify-ts/keripy step? The integration depends on having a stable SAID before any credentials can be issued.
 
+**Addressed by the planned M3 design:** finalize the schema, compute its SAID with `kli saidify`, and publish its OOBI on the community's schema server before any issuance.
+
 **Q3 — Revocation surfacing.** The matou-app HTTP API as it stands returns credentials from `anystore` — does the `Verified` field on `CachedCredential` (set at store time, see `credentials.go:116`) reflect ongoing registry state, or only the state at storage? The voice path needs *current* revocation status, not "was valid when first stored." If matou-app needs a `/api/v1/credentials/{said}/status` endpoint that re-checks the registry, that's a request to flag now.
 
 **Answered (Ben Tairea, June 2026 M2 review):** credential status is managed directly by KERIA's transaction event log (TEL) registry, which handles issuance and revocation. No separate matou-app status endpoint is needed; verifiers check the registry.
@@ -226,6 +228,8 @@ When `--matou-url` is omitted the existing CSV-only behavior is preserved. The K
 **Q4 — Withdrawal UX.** When a speaker withdraws, the matou-app frontend (signify-ts) needs to issue a revocation event. Does that flow exist for role credentials today, and is it generalizable, or does VoiceConsentCredential need its own withdrawal UI?
 
 **Q5 — Local development.** Can we point this repository's tests at a docker-compose'd matou-app + KERIA agent, or is the practical path to mock the HTTP client in tests and integration-test against a live local instance manually?
+
+**Addressed by the planned M3 design:** both. Unit tests run against recorded fixtures with no KERIA dependency, and integration tests run against a local matou-infrastructure stack (KERIA agents, witnesses and schema server) on its test ports.
 
 ---
 
